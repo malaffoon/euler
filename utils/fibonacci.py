@@ -11,7 +11,8 @@
    [1, 1, 2, 3, 5, 8]
 """
 
-from itertools import islice
+import itertools
+import math
 
 
 class Fibonacci(object):
@@ -50,6 +51,14 @@ def fibgen(max_value=None, max_count=10):
         count += 1
         prev, curr = curr, prev+curr
 
+
 def fibn(n):
-    """Return nth Fibonacci number; 1-based"""
-    return islice(fibgen(max_count=n), n-1, n).__next__()
+    """Return nth Fibonacci number; 1-based
+
+       In theory this could do something like (see unittest):
+          >>> itertools.islice(fibgen(max_count=n), n-1, n).__next__()
+       But Binet's formula is faster and accurate enough.
+    """
+    sqrt5 = math.sqrt(5)
+    Phi = (1 + sqrt5)/2
+    return math.floor(0.5 + math.pow(Phi, n) / sqrt5)

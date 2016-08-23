@@ -1,5 +1,5 @@
 import unittest
-from itertools import islice
+import itertools
 
 from utils.fibonacci import Fibonacci
 from utils.fibonacci import fibgen
@@ -33,6 +33,12 @@ class FibonacciTests(unittest.TestCase):
         self.assertEqual(1, fibn(2))
         self.assertEqual(13, fibn(7))
         self.assertEqual(3524578, fibn(33))
+
+    def test_fibn_vs_generator(self):
+        def fibn2(n):
+            return itertools.islice(fibgen(max_count=n), n-1, n).__next__()
+        for i in range(1,50):
+            self.assertEqual(0, fibn(i)-fibn2(i))
 
 if __name__ == '__main__':
     unittest.main()
