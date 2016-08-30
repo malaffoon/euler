@@ -7,7 +7,7 @@
    What is the smallest positive number that is evenly divisible by all of the numbers from 1 to 20?
 """
 
-from utils.math import lcm
+from utils.mathex import lcm
 
 
 class Problem5(object):

@@ -3,7 +3,21 @@
 
 import functools
 import itertools
+import threading
 from math import ceil, log, sqrt
+
+
+sieve_lock = threading.Lock()
+sieve = [False, False, True, True]
+def ensure_sieve(limit):
+    if len(sieve) < limit:
+        with sieve_lock:
+            sieve.extend([True] * (limit-len(sieve)))
+            for (i, flag) in enumerate(sieve):
+                if flag:
+                    for n in range(i*i, limit, i):
+                        sieve[n] = False
+    return sieve
 
 
 def prime_factors(value):
@@ -40,20 +54,19 @@ def nth(n):
 
 def generator(limit):
     """Generate primes less than limit"""
-    e = [True] * limit
-    e[0] = e[1] = False
-    for (i, flag) in enumerate(e):
-        if flag:
-            yield i
-            for n in range(i*i, limit, i):
-                e[n] = False
+    for (i, flag) in enumerate(ensure_sieve(limit)[:limit]):
+        if flag: yield i
+
+
+def is_prime(value):
+    """Return true if value is prime"""
+    return ensure_sieve(value+1)[value]
 
 
 def divisors(value):
     """Return a list of the divisors of a value. Always includes 1 and the value
 
-        >>> divisors(12)
-        [1, 2, 3, 4, 6, 12]
+        divisors(12) = [1, 2, 3, 4, 6, 12]
     """
 
     def prod(values):

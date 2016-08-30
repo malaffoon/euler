@@ -1,6 +1,6 @@
 import unittest
 
-from utils.math import lcm
+from utils.mathex import lcm
 
 
 class MathTests(unittest.TestCase):

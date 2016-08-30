@@ -1,7 +1,7 @@
 import unittest
 import math
 
-from utils.prime import divisors, factors, generator, prime_factors
+from utils.prime import divisors, factors, generator, is_prime, prime_factors
 
 
 class PrimeTests(unittest.TestCase):
@@ -37,6 +37,17 @@ class PrimeTests(unittest.TestCase):
         self.assertEqual([1,3], divisors(3))
         self.assertEqual([1,17], divisors(17))
         self.assertEqual([1,2,3,4,6,12], divisors(12))
+
+    def test_is_prime(self):
+        self.assertEqual(False, is_prime(1))
+        self.assertEqual(False, is_prime(4))
+        self.assertEqual(False, is_prime(81))
+        self.assertEqual(False, is_prime(10000))
+
+        self.assertEqual(True, is_prime(2))
+        self.assertEqual(True, is_prime(3))
+        self.assertEqual(True, is_prime(17))
+        self.assertEqual(True, is_prime(6857))
 
 if __name__ == '__main__':
     unittest.main()
