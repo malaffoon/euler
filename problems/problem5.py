@@ -13,7 +13,7 @@ from utils.mathex import lcm
 class Problem5(object):
     @staticmethod
     def solve():
-        return lcm(range(1,20))
+        return lcm(range(1,21))
 
 
 if __name__ == '__main__':
