@@ -7,17 +7,22 @@ import threading
 from math import ceil, log, sqrt
 
 
-sieve_lock = threading.Lock()
-sieve = [False, False, True, True]
-def ensure_sieve(limit):
-    if len(sieve) < limit:
-        with sieve_lock:
-            sieve.extend([True] * (limit-len(sieve)))
-            for (i, flag) in enumerate(sieve):
-                if flag:
-                    for n in range(i*i, limit, i):
-                        sieve[n] = False
-    return sieve
+__sieve_lock__ = threading.Lock()
+__sieve__ = [False, False, True, True]
+
+
+def __ensure_sieve__(limit):
+    global __sieve__
+    global __sieve_lock__
+    if len(__sieve__) < limit:
+        with __sieve_lock__:
+            if len(__sieve__) < limit:
+                __sieve__.extend([True] * (limit - len(__sieve__)))
+                for (i, flag) in enumerate(__sieve__):
+                    if flag:
+                        for n in range(i*i, limit, i):
+                            __sieve__[n] = False
+    return __sieve__
 
 
 def prime_factors(value):
@@ -49,18 +54,18 @@ def nth(n):
     """
     def guess_limit(n):
         return 30 if n < 10 else ceil(n * (log(n) + log(log(n))))
-    return itertools.islice(generator(guess_limit(n)), n - 1, None).__next__()
+    return itertools.islice(generator(guess_limit(n)), n - 1, n).__next__()
 
 
 def generator(limit):
     """Generate primes less than limit"""
-    for (i, flag) in enumerate(ensure_sieve(limit)[:limit]):
+    for (i, flag) in enumerate(__ensure_sieve__(limit)[:limit]):
         if flag: yield i
 
 
 def is_prime(value):
     """Return true if value is prime"""
-    return ensure_sieve(value+1)[value]
+    return __ensure_sieve__(value + 1)[value]
 
 
 def divisors(value):
