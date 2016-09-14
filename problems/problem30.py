@@ -12,14 +12,19 @@ As 1 = 1^4 is not a sum it is not included.
 The sum of these numbers is 1634 + 8208 + 9474 = 19316.
 
 Find the sum of all the numbers that can be written as the sum of fifth powers of their digits.
+
+NOTE: algorithmically very similar to Problem 34
 """
 
 
 class Problem30(object):
     @staticmethod
     def solve(p=5):
+        def is_sum(n):
+            return n == sum(int(d)**p for d in str(n))
+
         # max number to consider is approximately (p+1)*9^p
-        return sum(n for n in range(10, int((p+1)*(9**p))) if n == sum(int(d)**p for d in str(n)))
+        return sum(n for n in range(10, int((p+1)*(9**p))) if is_sum(n))
 
 
 if __name__ == '__main__':
