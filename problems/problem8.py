@@ -1,13 +1,13 @@
 """Problem 8 - Project Euler
 
-   Largest product in a series.
+Largest product in a series.
 
-   The four adjacent digits in the 1000-digit number that have the greatest product are 9 × 9 × 8 × 9 = 5832.
+The four adjacent digits in the 1000-digit number that have the greatest product are 9 × 9 × 8 × 9 = 5832.
 
-      73167176531330624919225119674426574742355349194934...
+  | 73167176531330624919225119674426574742355349194934...
 
-   Find the thirteen adjacent digits in the 1000-digit number that have the greatest product.
-   What is the value of this product?
+Find the thirteen adjacent digits in the 1000-digit number that have the greatest product.
+What is the value of this product?
 """
 
 import functools
@@ -19,8 +19,9 @@ class Problem8(object):
     @staticmethod
     def solve(n=13):
         digits = [int(s) for s in PROBLEM8_DATA]
-        return max(functools.reduce(lambda x,y:x*y, seg, 1) for seg in (digits[i:i+n] for i in range(0, len(digits)-n)))
+        return max(functools.reduce(lambda x, y: x * y, seg, 1) for seg in
+                   (digits[i:i + n] for i in range(0, len(digits) - n)))
+
 
 if __name__ == '__main__':
-    print("The highest product of four adjacent digits is", Problem8().solve(4))
-    print("The highest product of thirteen adjacent digits is", Problem8().solve())
+    print("The answer is", Problem8.solve())
