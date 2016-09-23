@@ -2,6 +2,7 @@
 """
 
 from functools import reduce
+from itertools import count
 from math import gcd
 
 
@@ -14,3 +15,17 @@ def lcm(values):
     def lcm_pair(a, b):
         return a * (b // gcd(a, b))
     return reduce(lcm_pair, values, 1)
+
+
+def champernowne():
+    """A generator for the digits of champernowne's constant.
+
+    Champernowne's constant is a number constructed by concatenating representations of successive integers.
+    For example, in base 10:
+      | 0.123456789101112131415...
+
+    This infinite generator emits just the digits of the sequence, starting with 1.
+    """
+    for v in count(1):
+        for d in str(v):
+            yield int(d)
