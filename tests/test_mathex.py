@@ -1,7 +1,7 @@
 import unittest
 
 import itertools
-from utils.mathex import lcm, champernowne
+from utils.mathex import lcm, champernowne, is_pandigital
 
 
 class MathTests(unittest.TestCase):
@@ -17,6 +17,12 @@ class MathTests(unittest.TestCase):
     def test_champerone(self):
         self.assertEqual([1, 2, 3], list(itertools.islice(champernowne(), 0, 3)))
         self.assertEqual([1, 1, 2, 1, 3, 1], list(itertools.islice(champernowne(), 12, 18)))
+
+    def test_is_pandigital(self):
+        self.assertTrue(is_pandigital(231))
+        self.assertTrue(is_pandigital('918273645'))
+        self.assertFalse(is_pandigital(1233))
+        self.assertFalse(is_pandigital('91827'))
 
 
 if __name__ == '__main__':

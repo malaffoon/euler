@@ -16,6 +16,8 @@ What is the largest 1 to 9 pandigital 9-digit number that can be formed as the c
 product of an integer with (1,2, ... , n) where n > 1?
 """
 
+from utils.mathex import is_pandigital
+
 
 class Problem38(object):
     @staticmethod
@@ -37,12 +39,8 @@ class Problem38(object):
         for (tpl, r) in ((tr[0], tr[1]) for tr in test_ranges):
             for n in r:
                 s = Problem38.__concatenated_product__(n, tpl)
-                if len(s) == 9 and Problem38.__is_pandigital__(s):
+                if len(s) == 9 and is_pandigital(s):
                     yield (int(s), n, tpl)
-
-    @staticmethod
-    def __is_pandigital__(s):
-        return all(str(n+1) in s for n in range(0, len(s)))
 
     @staticmethod
     def __concatenated_product__(n, tpl):

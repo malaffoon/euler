@@ -29,3 +29,8 @@ def champernowne():
     for v in count(1):
         for d in str(v):
             yield int(d)
+
+
+def is_pandigital(s):
+    s = str(s)
+    return all(str(n+1) in s for n in range(0, len(s)))
