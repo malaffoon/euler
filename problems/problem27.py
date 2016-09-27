@@ -28,7 +28,7 @@ all this makes me think there might be a non-algorithmic way to solve this
 """
 
 import itertools
-from utils.prime import generator, is_prime
+from utils.prime import primes, is_prime
 
 
 class Problem27(object):
@@ -36,18 +36,18 @@ class Problem27(object):
     def solve():
         max_primes = 0
         result = None
-        for b in generator(1001):
+        for b in primes(1001):
             for a in range(-b, 1000, 2):
-                primes = Problem27.number_of_primes_for(a, b)
-                if primes > max_primes:
+                n = Problem27.number_of_primes_for(a, b)
+                if n > max_primes:
                     result = a * b
-                    max_primes = primes
+                    max_primes = n
         return result
 
     @staticmethod
     def number_of_primes_for(a, b):
         def quad(n): return n * n + a * n + b
-        return sum(1 for p in itertools.takewhile(lambda x: x > 1 and is_prime(x), (quad(n) for n in itertools.count())))
+        return sum(1 for _ in itertools.takewhile(lambda x: x > 1 and is_prime(x), (quad(n) for n in itertools.count())))
 
 
 if __name__ == '__main__':

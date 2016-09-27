@@ -26,7 +26,7 @@ class Problem49(object):
 def find_sequences():
     sequences = []
     # go through all 4-digit primes, gathering sorted, unique prime permutations
-    for perms in (clean_permutations(get_permutations(p)) for p in prime.generator(10000) if p > 999):
+    for perms in (clean_permutations(get_permutations(p)) for p in prime.primes(10000) if p > 999):
         if len(perms) < 3: continue
         # find trios of the values that have the same difference between first/middle/last values
         for trio in itertools.combinations(perms, 3):

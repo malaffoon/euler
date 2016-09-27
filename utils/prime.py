@@ -8,7 +8,7 @@ from math import ceil, log, sqrt
 
 
 __sieve_lock__ = threading.Lock()
-__sieve__ = [False, False, True, True]
+__sieve__ = [False, False, True, True, False, True, False, True, False, False, False]
 
 
 def __ensure_sieve__(limit):
@@ -35,7 +35,7 @@ def factors(value):
         yield int(value)
         return
     # loop this way to avoid calculating all the primes up to sqrt if not necessary
-    for prime in generator(ceil(sqrt(value))):
+    for prime in primes(ceil(sqrt(value))):
         while value > 1 and value % prime == 0:
             yield prime
             value /= prime
@@ -54,18 +54,27 @@ def nth(n):
     """
     def guess_limit(n):
         return 30 if n < 10 else ceil(n * (log(n) + log(log(n))))
-    return itertools.islice(generator(guess_limit(n)), n - 1, n).__next__()
+    return itertools.islice(primes(guess_limit(n)), n - 1, n).__next__()
 
 
-def generator(limit):
+def primes(limit):
     """Generate primes less than limit"""
     for (i, flag) in enumerate(__ensure_sieve__(limit)[:limit]):
         if flag: yield i
 
 
 def is_prime(value):
-    """Return true if value is prime"""
-    return __ensure_sieve__(value + 1)[value]
+    """Return true if value is prime
+
+    A previous implementation used the sieve to determine primality. Something like:
+      | return __ensure_sieve__(value + 1)[value]
+    That was very fast once the sieve was populated. But it requires the sieve
+    to be calculated up to the value which can be both big and slow. The current
+    algorithms trades off repeat performance for lower overhead.
+    """
+    if value <= 1: return False
+    if value < len(__sieve__): return __sieve__[value]
+    return all(value % p != 0 for p in primes(1 + ceil(sqrt(value))))
 
 
 def divisors(value):

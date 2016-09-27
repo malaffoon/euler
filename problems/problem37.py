@@ -19,7 +19,7 @@ may have 2,5 only in first position
 Truncatable Primes: 23, 37, 53, 73, 313, 317, 373, 797, 3137, 3797, 739397
 """
 
-from utils.prime import is_prime, generator
+from utils.prime import is_prime, primes
 
 
 class Problem37(object):
@@ -38,7 +38,7 @@ class Problem37(object):
             return all(is_prime(int(s[:-i])) and is_prime(int(s[i:])) for i in range(1, len(s)))
 
         # can i prove 1000000 is a good limit?
-        return sum(p for p in generator(1000000) if is_truncatable_prime(p))
+        return sum(p for p in primes(1000000) if is_truncatable_prime(p))
 
 
 if __name__ == '__main__':

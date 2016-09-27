@@ -13,7 +13,7 @@ from utils import prime
 class Problem10(object):
     @staticmethod
     def solve(limit=2000000):
-        return sum(prime.generator(limit))
+        return sum(prime.primes(limit))
 
 
 if __name__ == '__main__':

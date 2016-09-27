@@ -9,13 +9,13 @@ There are thirteen such primes below 100: 2, 3, 5, 7, 11, 13, 17, 31, 37, 71, 73
 How many circular primes are there below one million?
 """
 
-from utils.prime import is_prime, generator
+from utils.prime import is_prime, primes
 
 
 class Problem35(object):
     @staticmethod
     def solve(limit=1000000):
-        return sum(1 for n in generator(limit) if is_circular_prime(n))
+        return sum(1 for n in primes(limit) if is_circular_prime(n))
 
 
 def is_circular_prime(n):
