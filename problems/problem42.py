@@ -14,7 +14,7 @@ Using words.txt, a 16K text file containing nearly two-thousand common English w
 class Problem42(object):
     @staticmethod
     def solve():
-        TRIANGLE_NUMBERS = [n*(n+1)//2 for n in range(1, 50)]
+        TRIANGLE_NUMBERS = [n*(n+1)//2 for n in range(1, 30)]
 
         def word_value(word):
             return sum(ord(c) - ord('A') + 1 for c in word)
