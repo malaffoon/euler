@@ -1,4 +1,6 @@
 """Helpers for dealing with prime numbers
+
+TODO - consider Sieve of Atkin or other modern improvement
 """
 
 import functools
@@ -68,9 +70,9 @@ def is_prime(value):
 
     A previous implementation used the sieve to determine primality. Something like:
       | return __ensure_sieve__(value + 1)[value]
-    That was very fast once the sieve was populated. But it requires the sieve
-    to be calculated up to the value which can be both big and slow. The current
-    algorithms trades off repeat performance for lower overhead.
+    That was very fast once the sieve was populated. But it requires the sieve to
+    be calculated up to the value which can be both big and slow for the first call.
+    The current algorithms trades off repeat performance for lower overhead.
     """
     if value <= 1: return False
     if value < len(__sieve__): return __sieve__[value]

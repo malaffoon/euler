@@ -1,19 +1,19 @@
 """Problem 10 - Project Euler
 
-   Summation of primes
+Summation of primes
 
-   The sum of the primes below 10 is 2 + 3 + 5 + 7 = 17.
+The sum of the primes below 10 is 2 + 3 + 5 + 7 = 17.
 
-   Find the sum of all the primes below two million.
+Find the sum of all the primes below two million.
 """
 
-from utils import prime
+from utils.prime import primes
 
 
 class Problem10(object):
     @staticmethod
     def solve(limit=2000000):
-        return sum(prime.primes(limit))
+        return sum(primes(limit))
 
 
 if __name__ == '__main__':

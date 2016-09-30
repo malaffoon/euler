@@ -31,6 +31,16 @@ def champernowne():
             yield int(d)
 
 
+def digits(n):
+    """returns digits of n in reverse order, faster than int(d)/str(n) approach
+
+    Note: if performance is critical, it is better to inline this functionality than to call this generator.
+    """
+    while n:
+        yield n % 10
+        n //= 10
+
+
 def is_pandigital(s):
     s = str(s)
     return all(str(n+1) in s for n in range(0, len(s)))
