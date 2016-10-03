@@ -15,9 +15,6 @@ Let d1 be the 1st digit, d2 be the 2nd digit, and so on. In this way, we note th
   | d8d9d10=289 is divisible by 17
 
 Find the sum of all 0 to 9 pandigital numbers with this property.
-
-Optimizations:
- * last 3 digits must be divisible by 17
 """
 from itertools import dropwhile
 
@@ -25,30 +22,26 @@ from itertools import dropwhile
 class Problem43(object):
     @staticmethod
     def solve():
-        # ugly, work-from-end approach:
-        def all_unique(s):
+        def __all_unique(s):
             return len(s) == len(set(s))
 
-        def useable_combos(r, f):
+        def __useable_combos(r, f):
             return filter(f, ('0' + str(v) if v < 100 else str(v) for v in dropwhile(lambda x: x < 10, r)))
 
-        def prepend(pq, tail, suffix):
-            result = 0
+        def __generate(pq=(17, 13, 11, 7, 5, 3, 2), tail=None, suffix=None):
+            """generator for qualified pandigital numbers"""
             if pq:
                 p, pq = pq[0], pq[1:]
-                for d in useable_combos(range(p, 1000, p), lambda x: x.endswith(tail) and all_unique(x[0] + suffix)):
-                    result += prepend(pq, d[0:2], d[0] + suffix)
+                # deal with the first iteration requiring different filter and suffix-building
+                f = __all_unique if not tail else lambda x: x.endswith(tail) and __all_unique(x[0] + suffix)
+                s = (lambda x: x) if not suffix else (lambda x: x[0] + suffix)
+                for d in __useable_combos(range(p, 1000, p), f):
+                    yield from __generate(pq, d[0:2], s(d))
             else:
-                for d1 in range(1, 10):
-                    candidate = str(d1) + suffix
-                    if all_unique(candidate):
-                        result += int(candidate)
-            return result
+                # finished with sub-strings, try to find a valid first digit
+                yield from (int(c) for c in filter(__all_unique, (str(d) + suffix for d in range(1, 10))))
 
-        result = 0
-        for d17 in useable_combos(range(17, 1000, 17), all_unique):
-            result += prepend([13, 11, 7, 5, 3, 2], d17[0:2], d17)
-        return result
+        return sum(__generate())
 
 
 if __name__ == '__main__':
