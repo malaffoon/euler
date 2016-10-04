@@ -11,18 +11,13 @@ Find the pair of pentagonal numbers, Pj and Pk, for which their sum and differen
 and D = |Pk − Pj| is minimised; what is the value of D?
 """
 from itertools import count
-from math import sqrt
+
+from utils.mathex import pentagonal, is_pentagonal
 
 
 class Problem44(object):
     @staticmethod
     def solve():
-        def is_pentagonal(n):
-            return ((1 + sqrt(24 * n + 1)) / 6).is_integer()
-
-        def pentagonal(i):
-            return i * (3 * i - 1) // 2
-
         # i had logic to accumulate the minimal difference but after running this
         # up to j=25000 i found no other pairs that were valid; yeah i think i
         # would have to go up to j = 2D/6 to be rigorous but ... meh

@@ -1,7 +1,8 @@
 import unittest
 
 import itertools
-from utils.mathex import lcm, champernowne, digits, is_pandigital
+from utils.mathex import lcm, champernowne, digits, is_pandigital, triagonal, is_triagonal, pentagonal, is_pentagonal, \
+    hexagonal, is_hexagonal
 
 
 class MathTests(unittest.TestCase):
@@ -27,6 +28,26 @@ class MathTests(unittest.TestCase):
         self.assertTrue(is_pandigital('918273645'))
         self.assertFalse(is_pandigital(1233))
         self.assertFalse(is_pandigital('91827'))
+
+    def test_triagonal(self):
+        self.assertEqual([1, 3, 6, 10, 15], list(triagonal(n) for n in range(1, 6)))
+        self.assertEqual([4, None, None, None, None, 5, None, None, None, None],
+                         list(is_triagonal(v) for v in range(10, 20)))
+
+    def test_pentagonal(self):
+        self.assertEqual([1, 5, 12, 22, 35], list(pentagonal(n) for n in range(1, 6)))
+        self.assertEqual([2, None, None, None, None, None, None, 3, None],
+                         list(is_pentagonal(v) for v in range(5, 14)))
+
+    def test_hexagonal(self):
+        self.assertEqual([1, 6, 15, 28, 45], list(hexagonal(n) for n in range(1, 6)))
+        self.assertEqual([1, None, None, None, None, 2, None],
+                         list(is_hexagonal(v) for v in range(1, 8)))
+
+    def test_tripenthex_example(self):
+        self.assertEqual(285, is_triagonal(40755))
+        self.assertEqual(165, is_pentagonal(40755))
+        self.assertEqual(143, is_hexagonal(40755))
 
 
 if __name__ == '__main__':

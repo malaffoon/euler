@@ -3,7 +3,7 @@
 
 from functools import reduce
 from itertools import count
-from math import gcd
+from math import gcd, sqrt
 
 
 def lcm(values):
@@ -12,8 +12,10 @@ def lcm(values):
        The LCM is the smallest number that is evenly divisible by all the values.
          lcm([8, 9, 12]) = 72
     """
+
     def lcm_pair(a, b):
         return a * (b // gcd(a, b))
+
     return reduce(lcm_pair, values, 1)
 
 
@@ -43,4 +45,31 @@ def digits(n):
 
 def is_pandigital(s):
     s = str(s)
-    return all(str(n+1) in s for n in range(0, len(s)))
+    return all(str(n + 1) in s for n in range(0, len(s)))
+
+
+def triagonal(n):
+    return n * (n + 1) // 2
+
+
+def is_triagonal(v):
+    n = (sqrt(1 + 8 * v) - 1) / 2
+    return int(n) if n.is_integer() else None
+
+
+def pentagonal(n):
+    return n * (3 * n - 1) // 2
+
+
+def is_pentagonal(v):
+    n = (sqrt(1 + 24 * v) + 1) / 6
+    return int(n) if n.is_integer() else None
+
+
+def hexagonal(n):
+    return n * (2 * n - 1)
+
+
+def is_hexagonal(v):
+    n = (sqrt(1 + 8 * v) + 1) / 4
+    return int(n) if n.is_integer() else None
