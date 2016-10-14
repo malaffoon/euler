@@ -35,4 +35,3 @@ class Problem15(object):
 
 if __name__ == '__main__':
     print("The number of such routes through a 20x20 grid is", Problem15().solve())
-    print("The number of such routes through a 20x20 grid is", Problem15().solve2())
