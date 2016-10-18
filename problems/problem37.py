@@ -40,6 +40,10 @@ class Problem37(object):
         # can i prove 1000000 is a good limit?
         return sum(p for p in primes(1000000) if is_truncatable_prime(p))
 
+    @staticmethod
+    def get_tests():
+        return [(None, 748317)]
+
 
 if __name__ == '__main__':
     print("The answer is", Problem37.solve())

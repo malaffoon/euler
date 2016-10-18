@@ -23,6 +23,10 @@ class Problem45(object):
             if is_pentagonal(v) and is_hexagonal(v):
                 return v
 
+    @staticmethod
+    def get_tests():
+        return [(None, 1533776805)]
+
 
 if __name__ == '__main__':
     print("The answer is", Problem45.solve())

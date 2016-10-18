@@ -47,6 +47,10 @@ class Problem9(object):
                     if (a * a + b * b) == c * c:
                         return a * b * c
 
+    @staticmethod
+    def get_tests():
+        return [(1000, 31875000), (12, 60)]
+
 
 if __name__ == '__main__':
     print("The product abc for the triplet is", Problem9.solve())

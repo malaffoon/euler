@@ -31,11 +31,14 @@ import math
 
 
 class Problem92(object):
-
     @staticmethod
     def solve(limit=10000000):
         lookup = Problem92.__lookup_table(limit)
         return sum(1 for c in (Problem92.__next_in_chain(i) for i in range(1, limit)) if lookup[c] == 89)
+
+    @staticmethod
+    def get_tests():
+        return [(None, 8581146)]
 
     @staticmethod
     def __next_in_chain(n):

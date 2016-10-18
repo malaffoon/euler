@@ -33,8 +33,12 @@ class Problem12(object):
             n += 1
             divs = divisors(triangle)
             if len(divs) > 500:
-                print(triangle, divs)
+                # print(triangle, divs)
                 return triangle
+
+    @staticmethod
+    def get_tests():
+        return [(None, 76576500)]
 
 
 if __name__ == '__main__':

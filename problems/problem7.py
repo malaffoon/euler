@@ -15,6 +15,10 @@ class Problem7(object):
     def solve(value=10001):
         return prime.nth(value)
 
+    @staticmethod
+    def get_tests():
+        return [(10001, 104743), (6, 13), (1, 2), (10, 29), (100, 541), (1000, 7919)]
+
 
 if __name__ == '__main__':
     print("The 10001st prime number is", Problem7().solve())

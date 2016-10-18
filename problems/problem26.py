@@ -45,6 +45,10 @@ class Problem26(object):
 
         return max(((d, cycle_length(d)) for d in range(2, limit)), key=lambda x: x[1])[0]
 
+    @staticmethod
+    def get_tests():
+        return [(1000, 983), (10, 7), (100, 97)]
+
 
 if __name__ == '__main__':
     print("The answer is", Problem26.solve())

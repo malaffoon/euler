@@ -19,6 +19,10 @@ class Problem4(object):
         # yeah this isn't elegant or anything; assume it will be from a product of 9xx's
         return max(prod for prod in (i*j for i in range(900, 1000) for j in range(i, 1000)) if is_palindrome(prod))
 
+    @staticmethod
+    def get_tests():
+        return [(None, 906609)]
+
 
 if __name__ == '__main__':
     print("The largest palindrome made from the product of two 3-digit numbers is", Problem4().solve())

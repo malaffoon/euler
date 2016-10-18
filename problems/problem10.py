@@ -15,7 +15,10 @@ class Problem10(object):
     def solve(limit=2000000):
         return sum(primes(limit))
 
+    @staticmethod
+    def get_tests():
+        return [(2000000, 142913828922), (10, 17)]
+
 
 if __name__ == '__main__':
-    print("The sum of all the primes below ten is", Problem10().solve(10))
     print("The sum of all the primes below two million is", Problem10().solve())

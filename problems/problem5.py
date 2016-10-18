@@ -15,6 +15,10 @@ class Problem5(object):
     def solve():
         return lcm(range(1,21))
 
+    @staticmethod
+    def get_tests():
+        return [(None, 232792560)]
+
 
 if __name__ == '__main__':
     print("The smallest positive number that is evenly divisible by all of the numbers from 1 to 20 is", Problem5.solve())

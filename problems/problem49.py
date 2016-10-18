@@ -20,7 +20,11 @@ class Problem49(object):
     @staticmethod
     def solve():
         # get the two sequences, and return the second one concatenated
-        return ''.join(str(n) for n in find_sequences()[1])
+        return int(''.join(str(n) for n in find_sequences()[1]))
+
+    @staticmethod
+    def get_tests():
+        return [(None, 296962999629)]
 
 
 def find_sequences():

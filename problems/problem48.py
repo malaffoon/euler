@@ -13,6 +13,10 @@ class Problem48(object):
     def solve(n=1000):
         return str(sum(i**i for i in range(1, n+1)))[-10:]
 
+    @staticmethod
+    def get_tests():
+        return [(None, '9110846700'), (10, '0405071317')]
+
 
 if __name__ == '__main__':
     print("The answer is", Problem48.solve())

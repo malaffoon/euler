@@ -113,6 +113,10 @@ class Problem13(object):
         # easy-peasy since python handles bignums ...
         return str(sum(PROBLEM13_DATA))[0:10]
 
+    @staticmethod
+    def get_tests():
+        return [(None, '5537376230')]
+
 
 if __name__ == '__main__':
     print("The first ten digits of the sum are", Problem13().solve())

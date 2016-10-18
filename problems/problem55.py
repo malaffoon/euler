@@ -33,6 +33,10 @@ class Problem55(object):
         return sum(1 for e in (Problem55.is_not_lychrel(n) for n in range(10, 10000)) if not e)
 
     @staticmethod
+    def get_tests():
+        return [(None, 249)]
+
+    @staticmethod
     def is_not_lychrel(n):
         def is_palindrome(value):
             s = str(value)

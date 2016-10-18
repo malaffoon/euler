@@ -25,6 +25,10 @@ class Problem42(object):
 
         return sum(1 for _ in filter(lambda v: v in TRIANGLE_NUMBERS, (word_value(w) for w in read_words())))
 
+    @staticmethod
+    def get_tests():
+        return [(None, 162)]
+
 
 if __name__ == '__main__':
     print("The answer is", Problem42.solve())

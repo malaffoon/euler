@@ -19,6 +19,10 @@ class Problem21(object):
     def solve():
         return sum(n for n in range(1, 10000) if is_amicable_number(n))
 
+    @staticmethod
+    def get_tests():
+        return [(None, 31626)]
+
 
 def is_amicable_number(n):
     s = sum(proper_divisors(n))

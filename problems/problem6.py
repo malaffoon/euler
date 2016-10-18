@@ -22,7 +22,10 @@ class Problem6(object):
     def solve(n):
         return n * (n+1) * (n-1) * (3*n+2) // 12
 
+    @staticmethod
+    def get_tests():
+        return [(100, 25164150), (10, 2640)]
+
 
 if __name__ == '__main__':
-    print("The difference between the sum of the squares of the first one ten natural numbers and the square of the sum is", Problem6().solve(10))
     print("The difference between the sum of the squares of the first one hundred natural numbers and the square of the sum is", Problem6().solve(100))

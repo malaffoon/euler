@@ -28,6 +28,10 @@ class Problem31(object):
 
         return count_combos_for(200, 200)
 
+    @staticmethod
+    def get_tests():
+        return [(None, 73682)]
+
 
 if __name__ == '__main__':
     print("The answer is", Problem31.solve())

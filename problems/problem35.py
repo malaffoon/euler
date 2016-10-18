@@ -17,6 +17,10 @@ class Problem35(object):
     def solve(limit=1000000):
         return sum(1 for n in primes(limit) if is_circular_prime(n))
 
+    @staticmethod
+    def get_tests():
+        return [(1000000, 55), (100, 13)]
+
 
 def is_circular_prime(n):
     if n < 10:

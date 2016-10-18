@@ -16,6 +16,10 @@ class Problem3(object):
         """Return the largest prime factor of the value"""
         return prime_factors(value)[-1]
 
+    @staticmethod
+    def get_tests():
+        return [(600851475143, 6857), (13147, 13147), (3, 3), (1, 1), (13195, 29)]
+
 
 if __name__ == '__main__':
     print("The largest prime factor of the number 600851475143 is", Problem3().solve(600851475143))

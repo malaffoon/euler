@@ -37,6 +37,10 @@ class Problem23(object):
                 summable[s] = True
         return sum(i for i, flag in enumerate(summable) if not flag)
 
+    @staticmethod
+    def get_tests():
+        return [(None, 4179871)]
+
 
 if __name__ == '__main__':
     print("The sum of all the positive integers which cannot be written as the sum of two abundant numbers is", Problem23.solve())

@@ -23,6 +23,10 @@ class Problem17(object):
     def solve(n=1000):
         return sum(letters(words(n)) for n in range(1, n+1))
 
+    @staticmethod
+    def get_tests():
+        return [(1000, 21124), (5, 19)]
+
 
 def letters(s):
     """Return number of non-space letters in a string"""

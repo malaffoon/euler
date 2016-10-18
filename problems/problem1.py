@@ -14,6 +14,9 @@ class Problem1(object):
         """Find the sum of all the multiples of 3 or 5 below the limit"""
         return self.solution2(limit)
 
+    def get_tests(self):
+        return [(1000, 233168), (10, 23)]
+
     @staticmethod
     def solution1(limit=1000):
         """Get array of multiples of 3 or 5, then sum them"""

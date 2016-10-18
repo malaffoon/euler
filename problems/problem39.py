@@ -27,6 +27,10 @@ class Problem39(object):
         return max(d.items(), key=lambda entry: entry[1])[0]
 
     @staticmethod
+    def get_tests():
+        return [(None, 840)]
+
+    @staticmethod
     def __generator__():
         """Generates valid right triangles with perimeters in given range, e.g. (120, (30,40,50))
 

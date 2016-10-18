@@ -18,6 +18,10 @@ class Problem20(object):
     def solve(n=100):
         return sum(int(c) for c in str(math.factorial(n)))
 
+    @staticmethod
+    def get_tests():
+        return [(100, 648), (10, 27)]
+
 
 if __name__ == '__main__':
     print("The sum of the digits in the number 100! is", Problem20().solve())

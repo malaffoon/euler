@@ -26,6 +26,10 @@ class Problem30(object):
         # max number to consider is approximately (p+1)*9^p
         return sum(n for n in range(10, int((p+1)*(9**p))) if is_sum(n))
 
+    @staticmethod
+    def get_tests():
+        return [(5, 443839), (4, 19316)]
+
 
 if __name__ == '__main__':
     print("The sum of all the numbers that can be written as the sum of fifth powers of their digits is", Problem30.solve())

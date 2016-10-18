@@ -9,7 +9,6 @@
    By considering the terms in the Fibonacci sequence whose values do not exceed four million,
    find the sum of the even-valued terms.
 """
-
 from utils.fibonacci import fibgen
 
 
@@ -24,6 +23,10 @@ class Problem2(object):
             if n % 2 == 0:
                 answer += n
         return answer
+
+    @staticmethod
+    def get_tests():
+        return [(4000000, 4613732), (100, 44)]
 
 
 if __name__ == '__main__':

@@ -24,6 +24,10 @@ class Problem28(object):
         # So, just add 'em all up for r=1,500; don't forget the degenerate 1
         return 1 + sum(4*(4*r*r+r+1) for r in range(1, 1+(n-1)//2))
 
+    @staticmethod
+    def get_tests():
+        return [(1001, 669171001), (5, 101)]
+
 
 if __name__ == '__main__':
     print("The answer is", Problem28.solve())

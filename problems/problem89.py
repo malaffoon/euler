@@ -65,6 +65,10 @@ class Problem89(object):
         return sum(len(r) - len(minimal(r)) for r in Problem89.read_romans())
 
     @staticmethod
+    def get_tests():
+        return [(None, 743)]
+
+    @staticmethod
     def read_romans():
         with open('../resources/p089_roman.txt') as file:
             return map(lambda s: s.strip(), file.readlines())

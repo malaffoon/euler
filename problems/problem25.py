@@ -28,6 +28,9 @@ class Problem25(object):
 
         return math.ceil((digits - 1 + math.log10(sqrt5)) / math.log10(Phi))
 
+    @staticmethod
+    def get_tests():
+        return [(1000, 4782), (3, 12)]
+
 if __name__ == '__main__':
-    print("The index of the first term in the Fibonacci sequence to contain 3 digits is", Problem25().solve(3))
     print("The index of the first term in the Fibonacci sequence to contain 1000 digits is", Problem25().solve())

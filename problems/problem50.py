@@ -28,6 +28,10 @@ class Problem50(object):
                 longest = (s, stop-start)
         return longest[0]
 
+    @staticmethod
+    def get_tests():
+        return [(None, 997651), (100, 41), (1000, 953)]
+
 
 if __name__ == '__main__':
     print("The answer is", Problem50.solve())

@@ -40,7 +40,7 @@ class Problem11(object):
             nonlocal max_product
             prod = functools.reduce(lambda x,y: x * y, s, 1)
             if prod > max_product:
-                print("Improving max with {} = {}", s, prod)
+                # print("Improving max with {} = {}", s, prod)
                 max_product = prod
 
         # being kind of lazy and brute-forcing this (not very pythonic)
@@ -53,6 +53,10 @@ class Problem11(object):
                 if r > 3 and c > 3: check_max(data[p:p + 76:19]) # diagonal left
 
         return max_product
+
+    @staticmethod
+    def get_tests():
+        return [(None, 70600674)]
 
 
 if __name__ == '__main__':

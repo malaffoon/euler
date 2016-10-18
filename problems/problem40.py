@@ -31,6 +31,10 @@ class Problem40(object):
         return reduce(mul, (int(next(islice(chain.from_iterable(str(n) for n in count(1)), p - 1, None))) for p in _positions))
 
     @staticmethod
+    def get_tests():
+        return [(None, 210)]
+
+    @staticmethod
     def solve3():
         # 0.17s
         def skip(it, n):

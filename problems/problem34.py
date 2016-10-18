@@ -24,6 +24,10 @@ class Problem34(object):
     __factorials__ = {'0': 1, '1': 1, '2': 2, '3': 6, '4': 24, '5': 120, '6': 720, '7': 5040, '8': 40320, '9': 362880}
     __max_limit__ = 7 * __factorials__['9']
 
+    @staticmethod
+    def get_tests():
+        return [(None, 40730), (200, 145)]
+
 
 if __name__ == '__main__':
     print("The answer is", Problem34.solve())

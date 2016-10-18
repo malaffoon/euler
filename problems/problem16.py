@@ -14,6 +14,10 @@ class Problem16(object):
         # Python makes this easy ...
         return sum(int(c) for c in str(2**n))
 
+    @staticmethod
+    def get_tests():
+        return [(1000, 1366), (5, 5), (15, 26)]
+
 
 if __name__ == '__main__':
     print("The sum of the digits of the number 2^1000 is", Problem16().solve())

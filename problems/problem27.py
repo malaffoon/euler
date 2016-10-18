@@ -45,6 +45,10 @@ class Problem27(object):
         return result
 
     @staticmethod
+    def get_tests():
+        return [(None, -59231)]
+
+    @staticmethod
     def number_of_primes_for(a, b):
         def quad(n): return n * n + a * n + b
         return sum(1 for _ in itertools.takewhile(lambda x: x > 1 and is_prime(x), (quad(n) for n in itertools.count())))

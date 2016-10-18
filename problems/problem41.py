@@ -23,6 +23,10 @@ class Problem41(object):
         return Problem41.solve_by_perms()
 
     @staticmethod
+    def get_tests():
+        return [(None, 7652413)]
+
+    @staticmethod
     def solve_by_perms():
         # takes 1ms first run, 0.4ms second run
         return next(n for n in (int(''.join(p)) for p in permutations('7654321', 7)) if is_prime(n))

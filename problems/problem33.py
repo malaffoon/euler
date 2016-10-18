@@ -45,6 +45,10 @@ class Problem33(object):
             if num != '0' and den != '0': return float(num) / float(den)
         return None
 
+    @staticmethod
+    def get_tests():
+        return [(None, 100)]
+
 
 if __name__ == '__main__':
     print("The answer is", Problem33.solve())

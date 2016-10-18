@@ -43,6 +43,10 @@ class Problem43(object):
 
         return sum(__generate())
 
+    @staticmethod
+    def get_tests():
+        return [(None, 16695334890)]
+
 
 if __name__ == '__main__':
     print("The answer is", Problem43.solve())

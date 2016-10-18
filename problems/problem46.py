@@ -32,6 +32,10 @@ class Problem46(object):
             if any(is_prime(n - ts) for ts in twice_squares if ts < n): continue
             return n
 
+    @staticmethod
+    def get_tests():
+        return [(None, 5777)]
+
 
 if __name__ == '__main__':
     print("The answer is", Problem46.solve())

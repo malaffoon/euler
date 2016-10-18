@@ -25,6 +25,10 @@ class Problem38(object):
         return max(Problem38.__generator__(), key=lambda t: t[0])[0]
 
     @staticmethod
+    def get_tests():
+        return [(None, 932718654)]
+
+    @staticmethod
     def __generator__():
         """Generates pandigital concatenated products for this problem
 

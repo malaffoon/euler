@@ -38,6 +38,10 @@ class Problem32(object):
                     products.add(p)
         return sum(products)
 
+    @staticmethod
+    def get_tests():
+        return [(None, 45228)]
+
 
 if __name__ == '__main__':
     print("The answer is", Problem32.solve())

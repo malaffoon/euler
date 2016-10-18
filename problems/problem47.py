@@ -26,6 +26,10 @@ class Problem47(object):
         return Problem47.solve_sieve(distinct)
 
     @staticmethod
+    def get_tests():
+        return [(4, 134043), (2, 14), (3, 644)]
+
+    @staticmethod
     def solve_sieve(distinct=4):
         # 140ms
         # create the sieve of distinct prime counts

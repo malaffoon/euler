@@ -23,6 +23,10 @@ class Problem29(object):
         # but this calculates really quickly as is ...
         return len(set(math.pow(a, b) for a in range(2, n+1) for b in range(2, n+1)))
 
+    @staticmethod
+    def get_tests():
+        return [(100, 9183), (5, 15)]
+
 
 if __name__ == '__main__':
     print("The answer is", Problem29.solve())

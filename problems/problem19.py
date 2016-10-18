@@ -41,6 +41,10 @@ class Problem19(object):
                 day = (day + DAYS_PER_MONTH[m]) % 7
         return count
 
+    @staticmethod
+    def get_tests():
+        return [(None, 171)]
+
 
 def is_leap(year):
     return year % 4 == 0 and (year % 100 != 0 or year % 400 == 0)

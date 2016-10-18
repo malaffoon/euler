@@ -33,6 +33,10 @@ class Problem71(object):
         return result[1][0]
 
     @staticmethod
+    def get_tests():
+        return [(None, 428570), (8, 2), (100, 41), (1000, 428)]
+
+    @staticmethod
     def solve_loop(maxD=8, right=3/7):
         # O(n**2) and for n=10000 -> 20s, so n=1000000 -> 60 hours
         result = (1.0, None)

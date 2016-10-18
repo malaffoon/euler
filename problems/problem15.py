@@ -32,6 +32,10 @@ class Problem15(object):
                 grid[row][col] = grid[row][col-1] + grid[row-1][col]
         return grid[-1][-1]
 
+    @staticmethod
+    def get_tests():
+        return [(20, 137846528820), (2, 6), (3, 20), (4, 70)]
+
 
 if __name__ == '__main__':
     print("The number of such routes through a 20x20 grid is", Problem15().solve())

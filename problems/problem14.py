@@ -53,6 +53,10 @@ class Problem14(object):
                 max_value = v
         return max_value
 
+    @staticmethod
+    def get_tests():
+        return [(None, 837799)]
+
 
 if __name__ == '__main__':
     print("The starting number, under one million, that produces the longest Collatz sequence is", Problem14().solve())

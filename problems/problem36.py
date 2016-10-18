@@ -32,6 +32,10 @@ class Problem36(object):
 
         return sum(n for n in range(1, limit, 2) if is_palindrome(str(n)) and is_palindrome(bin(n)[2:]))
 
+    @staticmethod
+    def get_tests():
+        return [(1000000, 872187), (10, 25)]
+
 
 if __name__ == '__main__':
     print("The answer is", Problem36.solve())

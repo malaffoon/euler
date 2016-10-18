@@ -28,6 +28,10 @@ class Problem51(object):
         return Problem51.generator(n).__next__()[0]
 
     @staticmethod
+    def get_tests():
+        return [(8, 121313), (6, 13), (7, 56003)]
+
+    @staticmethod
     def generator(n):
         # there is some consensus that the wording implies there will be 3 substituted digits
         digits = [str(i) for i in range(10)]

@@ -19,6 +19,10 @@ class Problem22(object):
     def solve(filename='../resources/p022_names.txt'):
         return sum(score(pos, name) for (pos, name) in enumerate(sorted(read_names(filename)), start=1))
 
+    @staticmethod
+    def get_tests():
+        return [(None, 871198282)]
+
 
 def read_names(filename):
     with open(filename, 'r') as file:

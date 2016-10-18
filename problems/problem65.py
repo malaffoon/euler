@@ -45,6 +45,10 @@ class Problem65(object):
         # all that is desired is the sum of the digits of the numerator of the convergent
         return sum(int(d) for d in str(c[0]))
 
+    @staticmethod
+    def get_tests():
+        return [(100, 272), (10, 17)]
+
 
 if __name__ == '__main__':
     print("The answer is", Problem65.solve())

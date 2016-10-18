@@ -29,6 +29,10 @@ class Problem44(object):
                 if is_pentagonal(pj + pk) and is_pentagonal(pj - pk):
                     return pj - pk
 
+    @staticmethod
+    def get_tests():
+        return [(None, 5482660)]
+
 
 if __name__ == '__main__':
     print("The answer is", Problem44.solve())

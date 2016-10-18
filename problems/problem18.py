@@ -68,6 +68,10 @@ class Problem18(object):
         # i'll wait until problem 67 to figure out the efficient algorithm
         return max(sum(p) for p in path_generator(triangle))
 
+    @staticmethod
+    def get_tests():
+        return [(PROBLEM18_DATA, 1074), (PROBLEM18_EXAMPLE, 23)]
+
 
 def path_generator(triangle):
     # depth-first

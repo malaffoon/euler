@@ -29,7 +29,11 @@ class Problem79(object):
 
         keys = list(Problem79.read_keylog())
         uniques = list(set(it.chain.from_iterable(keys)))
-        return ''.join(sorted(uniques, key=ft.cmp_to_key(sorter)))
+        return int(''.join(sorted(uniques, key=ft.cmp_to_key(sorter))))
+
+    @staticmethod
+    def get_tests():
+        return [(None, 73162890)]
 
     @staticmethod
     def read_keylog():

@@ -45,6 +45,10 @@ class Problem8(object):
             i += 1
         return result
 
+    @staticmethod
+    def get_tests():
+        return [(13, 23514624000), (4, 5832)]
+
 
 if __name__ == '__main__':
     print("The answer is", Problem8.solve())
