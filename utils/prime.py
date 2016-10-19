@@ -68,15 +68,58 @@ def primes(limit):
 def is_prime(value):
     """Return true if value is prime
 
-    A previous implementation used the sieve to determine primality. Something like:
-      | return __ensure_sieve__(value + 1)[value]
-    That was very fast once the sieve was populated. But it requires the sieve to
-    be calculated up to the value which can be both big and slow for the first call.
-    The current algorithms trades off repeat performance for lower overhead.
+    Note: returns false for 0 and 1
     """
+
     if value <= 1: return False
+    # use existing sieve values for quick answer
     if value < len(__sieve__): return __sieve__[value]
-    return all(value % p != 0 for p in primes(1 + ceil(sqrt(value))))
+
+    # There have been a few iterations of this method.
+    #
+    # First one simply used the sieve calculated to the value, something like:
+    #   return __ensure_sieve__(value + 1)[value]
+    #
+    # Next it used the sieve is already calculated but avoided taking the big hit
+    # of calculating the sieve all the way up to the number by dividing up to sqrt:
+    #   return all(value % p != 0 for p in primes(1 + ceil(sqrt(value))))
+    #
+    # Still too slow, so time for Miller-Rabin
+    return _MillerRabin(value)
+
+
+# for small n, we can limit the a's to test (https://en.wikipedia.org/wiki/Miller%E2%80%93Rabin_primality_test)
+_test_limits = [
+    (1373653, (2, 3)),
+    (9080191, (31, 73)),
+    (25326001, (2, 3, 5)),
+    (3215031751, (2, 3, 5, 7)),
+    (4759123141, (2, 7, 61)),
+    (2152302898747, (2, 3, 5, 7, 11)),
+    (3474749660383, (2, 3, 5, 7, 11, 13)),
+    (341550071728321, (2, 3, 5, 7, 11, 13, 17))
+]
+
+def _MillerRabin(n, _precision_for_large_n=16):
+    if n in _known_primes: return True
+    if any((n % p) == 0 for p in _known_primes): return False
+
+    d, s = n - 1, 0
+    while not d % 2:
+        d, s = d >> 1, s + 1
+
+    def _try_composite(a, d, n, s):
+        if pow(a, d, n) == 1: return False
+        for i in range(s):
+            if pow(a, 2**i * d, n) == n-1: return False
+        return True
+
+    for tl in _test_limits:
+        if n < tl[0]: return not any(_try_composite(a, d, n, s) for a in tl[1])
+    return not any(_try_composite(a, d, n, s) for a in _known_primes[:_precision_for_large_n])
+
+_known_primes = [2, 3]
+_known_primes += [x for x in range(5, 1000, 2) if _MillerRabin(x)]
 
 
 def divisors(value):

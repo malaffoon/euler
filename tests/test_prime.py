@@ -39,16 +39,22 @@ class PrimeTests(unittest.TestCase):
         self.assertEqual([1,2,3,4,6,12], divisors(12))
 
     def test_is_prime(self):
-        self.assertEqual(False, is_prime(1))
-        self.assertEqual(False, is_prime(4))
-        self.assertEqual(False, is_prime(81))
-        self.assertEqual(False, is_prime(1681))
-        self.assertEqual(False, is_prime(10000))
+        self.assertFalse(is_prime(1))
+        self.assertFalse(is_prime(4))
+        self.assertFalse(is_prime(81))
+        self.assertFalse(is_prime(1681))
+        self.assertFalse(is_prime(10000))
 
-        self.assertEqual(True, is_prime(2))
-        self.assertEqual(True, is_prime(3))
-        self.assertEqual(True, is_prime(17))
-        self.assertEqual(True, is_prime(6857))
+        self.assertTrue(is_prime(2))
+        self.assertTrue(is_prime(3))
+        self.assertTrue(is_prime(17))
+        self.assertTrue(is_prime(6857))
+
+    def test_is_prime_some_more(self):
+        self.assertTrue(is_prime(4547337172376300111955330758342147474062293202868155909489))
+        self.assertFalse(is_prime(4547337172376300111955330758342147474062293202868155909393))
+        self.assertTrue(is_prime(643808006803554439230129854961492699151386107534013432918073439524138264842370630061369715394739134090922937332590384720397133335969549256322620979036686633213903952966175107096769180017646161851573147596390153))
+        self.assertFalse(is_prime(743808006803554439230129854961492699151386107534013432918073439524138264842370630061369715394739134090922937332590384720397133335969549256322620979036686633213903952966175107096769180017646161851573147596390153))
 
 
 if __name__ == '__main__':
