@@ -16,9 +16,11 @@ TODO - parsing of args is rolled into runner and shouldn't be.
 import glob
 import importlib
 import os
+import queue
 import time
 
 import sys
+from threading import Thread
 
 
 class EulerTimer(object):
@@ -48,11 +50,43 @@ class EulerTestRunner(object):
             self.testables = self._discoverTestables(argv[1:])
 
     def run(self):
+        start = time.time()
+        # turns out primes isn't really MTS so some tests fail under mtrun
+        # if len(self.testables) == 1:
+        #     self.strun()
+        # else:
+        #     self.mtrun()
+        self.strun()
+        stop = time.time()
+        print('Total run time: %d secs' % (stop-start,))
+
+    def strun(self):
         failures = 0
         for testable in self.testables:
             failures += self.runTestable(testable())
         if failures and len(self.testables) > 1:
             print("There were FAILURES")
+
+    def mtrun(self, number_of_workers=4):
+        # create queue of testables
+        q = queue.Queue()
+        for testable in self.testables:
+            q.put_nowait(testable)
+
+        # create pool of workers
+        def do_work():
+            nonlocal q
+            failures = 0
+            while q.qsize() > 0:
+                try:
+                    testable = q.get()
+                    failures += self.runTestable(testable())
+                except queue.Empty:
+                    break
+
+        threads = [Thread(target=do_work) for _ in range(number_of_workers)]
+        for t in threads: t.start()
+        for t in threads: t.join()
 
     def runTestable(self, testable):
         """Run a single testable object, emitting results"""
@@ -61,20 +95,20 @@ class EulerTestRunner(object):
             print('%s - no tests' % testable.__class__.__name__)
             return 0
 
-        print('%s' % testable.__class__.__name__, end = '\n' if self.run_extra_tests else ' -')
+        output = ['%s' % (testable.__class__.__name__,)]
         failures = 0
         for test in tests:
             with EulerTimer() as t:
                 actual = testable.solve(test[0]) if test[0] else testable.solve()
 
             if actual == test[1]:
-                print(' Success in %s: %s = solve(%s)' % (str(t), test[1], test[0] if test[0] else ''))
+                output.append(' Success in %s: %s = solve(%s)' % (str(t), test[1], test[0] if test[0] else ''))
             else:
                 failures += 1
-                print(' FAILURE: solve(%s) = %s, expected: %s' % (test[0] if test[0] else '', actual, test[1]))
+                output.append(' FAILURE: solve(%s) = %s, expected: %s' % (test[0] if test[0] else '', actual, test[1]))
 
             if not self.run_extra_tests: break
-
+        print('\n'.join(output) if self.run_extra_tests else ' - '.join(output))
         return failures
 
     def _loadTestablesFromModule(self, module):
