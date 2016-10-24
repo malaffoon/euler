@@ -48,12 +48,21 @@ def is_pandigital(s):
     return all(str(n + 1) in s for n in range(0, len(s)))
 
 
-def triagonal(n):
+def trigonal(n):
     return n * (n + 1) // 2
 
 
-def is_triagonal(v):
+def is_trigonal(v):
     n = (sqrt(1 + 8 * v) - 1) / 2
+    return int(n) if n.is_integer() else None
+
+
+def tetragonal(n):
+    return n * n
+
+
+def is_tetragonal(v):
+    n = sqrt(v)
     return int(n) if n.is_integer() else None
 
 
@@ -72,4 +81,22 @@ def hexagonal(n):
 
 def is_hexagonal(v):
     n = (sqrt(1 + 8 * v) + 1) / 4
+    return int(n) if n.is_integer() else None
+
+
+def heptagonal(n):
+    return n * (5 * n - 3) // 2
+
+
+def is_heptagonal(v):
+    n = (sqrt(9 + 40 * v) + 3) / 10
+    return int(n) if n.is_integer() else None
+
+
+def octagonal(n):
+    return n * (3 * n - 2)
+
+
+def is_octagonal(v):
+    n = (sqrt(4 + 12 * v) + 2) / 6
     return int(n) if n.is_integer() else None

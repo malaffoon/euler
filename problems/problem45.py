@@ -12,14 +12,14 @@ Find the next triangle number that is also pentagonal and hexagonal.
 """
 from itertools import count
 
-from utils.mathex import triagonal, is_pentagonal, is_hexagonal
+from utils.mathex import trigonal, is_pentagonal, is_hexagonal
 
 
 class Problem45(object):
     @staticmethod
     def solve():
         for n in count(286):
-            v = triagonal(n)
+            v = trigonal(n)
             if is_pentagonal(v) and is_hexagonal(v):
                 return v
 
