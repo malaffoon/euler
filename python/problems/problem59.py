@@ -57,7 +57,7 @@ class Problem59(object):
 
     @staticmethod
     def read_cipher():
-        with open('../resources/p059_cipher.txt') as file:
+        with open('../../resources/p059_cipher.txt') as file:
             return (int(s) for s in file.read().split(','))
 
     @staticmethod

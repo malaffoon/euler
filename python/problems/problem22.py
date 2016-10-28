@@ -16,7 +16,7 @@ NOTE: file contains double-quoted names separated by commas, e.g.
 
 class Problem22(object):
     @staticmethod
-    def solve(filename='../resources/p022_names.txt'):
+    def solve(filename='../../resources/p022_names.txt'):
         return sum(score(pos, name) for (pos, name) in enumerate(sorted(read_names(filename)), start=1))
 
     @staticmethod

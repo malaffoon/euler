@@ -31,7 +31,7 @@ class Problem81(object):
 
     @staticmethod
     def _read_matrix():
-        with open('../resources/p081_matrix.txt') as file:
+        with open('../../resources/p081_matrix.txt') as file:
             return [[int(c) for c in line.split(',')] for line in file.readlines()]
 
 

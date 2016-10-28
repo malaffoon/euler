@@ -37,7 +37,7 @@ class Problem79(object):
 
     @staticmethod
     def read_keylog():
-        with open('../resources/p079_keylog.txt') as file:
+        with open('../../resources/p079_keylog.txt') as file:
             return map(lambda s: s.strip(), file.readlines())
 
 

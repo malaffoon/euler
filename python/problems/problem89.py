@@ -70,7 +70,7 @@ class Problem89(object):
 
     @staticmethod
     def read_romans():
-        with open('../resources/p089_roman.txt') as file:
+        with open('../../resources/p089_roman.txt') as file:
             return map(lambda s: s.strip(), file.readlines())
 
 

@@ -53,7 +53,7 @@ class Problem54(object):
 
     @staticmethod
     def _read_hands():
-        with open('../resources/p054_poker.txt') as file:
+        with open('../../resources/p054_poker.txt') as file:
             return map(lambda cards: (cards[0:5], cards[5:10]), map(lambda line: line.strip().split(' '), file.readlines()))
 
     @staticmethod

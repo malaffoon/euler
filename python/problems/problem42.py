@@ -20,7 +20,7 @@ class Problem42(object):
             return sum(ord(c) - ord('A') + 1 for c in word)
 
         def read_words():
-            with open('../resources/p042_words.txt') as file:
+            with open('../../resources/p042_words.txt') as file:
                 return (s.strip('"') for s in file.read().split(','))
 
         return sum(1 for _ in filter(lambda v: v in TRIANGLE_NUMBERS, (word_value(w) for w in read_words())))
