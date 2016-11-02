@@ -5,6 +5,7 @@ TODO - consider Sieve of Atkin or other modern improvement
 
 import functools
 import itertools
+import operator
 import threading
 from math import ceil, log, sqrt
 
@@ -37,7 +38,7 @@ def factors(value):
         yield int(value)
         return
     # loop this way to avoid calculating all the primes up to sqrt if not necessary
-    for prime in primes(ceil(sqrt(value))):
+    for prime in primes(int(1 + sqrt(value))):
         while value > 1 and value % prime == 0:
             yield prime
             value /= prime
@@ -139,3 +140,12 @@ def divisors(value):
     result.append(1)
     result.sort()
     return result
+
+
+def phi(n):
+    """Euler's Totient function, phi(n) returns the number of numbers that are less than
+    n which are relatively prime to n. For example, 1, 2, 4, 5, 7, 8 are less than 9 and
+    relatively prime to 9 so phi(9) = 6. For any prime number all numbers less than n are
+    relatively prime so phi(p) = p - 1.
+    """
+    return int(n * functools.reduce(operator.mul, map(lambda p: 1 - 1/p, set(factors(n))), 1))

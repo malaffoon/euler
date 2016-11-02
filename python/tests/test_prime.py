@@ -1,7 +1,7 @@
 import unittest
 import math
 
-from utils.prime import divisors, factors, primes, is_prime, prime_factors
+from utils.prime import divisors, factors, phi, primes, is_prime, prime_factors
 
 
 class PrimeTests(unittest.TestCase):
@@ -21,6 +21,7 @@ class PrimeTests(unittest.TestCase):
     def test_factors(self):
         self.assertEqual([2], list(factors(2)))
         self.assertEqual([3], list(factors(3)))
+        self.assertEqual([3,3], list(factors(9)))
         self.assertEqual([17], list(factors(17)))
         self.assertEqual([2,2,3], list(factors(12)))
         self.assertEqual([5,7,13,29], list(factors(13195)))
@@ -56,6 +57,9 @@ class PrimeTests(unittest.TestCase):
         self.assertTrue(is_prime(643808006803554439230129854961492699151386107534013432918073439524138264842370630061369715394739134090922937332590384720397133335969549256322620979036686633213903952966175107096769180017646161851573147596390153))
         self.assertFalse(is_prime(743808006803554439230129854961492699151386107534013432918073439524138264842370630061369715394739134090922937332590384720397133335969549256322620979036686633213903952966175107096769180017646161851573147596390153))
 
+    def test_phi(self):
+        self.assertEqual(6, phi(9))
+        self.assertEqual(22, phi(23))
 
 if __name__ == '__main__':
     unittest.main()
