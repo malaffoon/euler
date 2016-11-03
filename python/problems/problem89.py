@@ -52,16 +52,18 @@ Common Reductions (given all the caveats)
   | DCCCC -> CM
   | CCCC -> CD  (but not if it duplicates D)
 """
+import utils.roman_numerals as rn
 
 
 class Problem89(object):
     @staticmethod
     def solve():
         def minimal(r):
-            return r\
-                .replace('VIIII', 'IX').replace('IIII', 'IV')\
-                .replace('LXXXX', 'XC').replace('XXXX', 'XL')\
-                .replace('DCCCC', 'CM').replace('CCCC', 'CD')
+            return rn.toRomanNumeral(rn.fromRomanNumeral(r))
+            # return r\
+            #     .replace('VIIII', 'IX').replace('IIII', 'IV')\
+            #     .replace('LXXXX', 'XC').replace('XXXX', 'XL')\
+            #     .replace('DCCCC', 'CM').replace('CCCC', 'CD')
         return sum(len(r) - len(minimal(r)) for r in Problem89.read_romans())
 
     @staticmethod
