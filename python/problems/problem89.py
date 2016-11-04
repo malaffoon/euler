@@ -51,6 +51,7 @@ Common Reductions (given all the caveats)
   | XXXX -> XL  (but not if it duplicates L)
   | DCCCC -> CM
   | CCCC -> CD  (but not if it duplicates D)
+The regex approach is very fast compared to the to/fromRomanNumeral (1-2ms vs 8-9ms)
 """
 import utils.roman_numerals as rn
 

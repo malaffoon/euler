@@ -1,7 +1,7 @@
 """Methods for dealing with Roman Numerals
 """
 
-_mappings = (
+_numeral_values = (
     ('M', 1000),
     ('CM', 900),
     ('D',  500),
@@ -21,17 +21,17 @@ _mappings = (
 def toRomanNumeral(n):
     """Convert the integer value to the most efficient roman numeral"""
     result = ''
-    for mapping in _mappings:
-        while n >= mapping[1]:
-            result += mapping[0]
-            n -= mapping[1]
+    for numeral, value in _numeral_values:
+        while n >= value:
+            result += numeral
+            n -= value
     return result
 
 
 def fromRomanNumeral(r):
     result = 0
-    for mapping in _mappings:
-        while r.startswith(mapping[0]):
-            result += mapping[1]
-            r = r[len(mapping[0]):]
+    for numeral, value in _numeral_values:
+        while r.startswith(numeral):
+            result += value
+            r = r[len(numeral):]
     return result
