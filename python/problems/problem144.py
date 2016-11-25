@@ -30,6 +30,7 @@ The animation on the right shows the first 10 reflections of the beam.
 How many times does the beam hit the internal surface of the white cell before exiting?
 """
 import math
+from itertools import count
 
 
 class Problem144(object):
@@ -45,6 +46,7 @@ class Problem144(object):
 
         def intersections(line):
             # line input is (m,b) tuple
+            # output is the two intersections
             a = line[0] * line[0] + 4
             b = 2 * line[0] * line[1]
             c = line[1] * line[1] - 100
@@ -52,22 +54,25 @@ class Problem144(object):
             x2 = (-b - math.sqrt(b*b - 4*a*c)) / (2*a)
             return (x1, line[0]*x1 + line[1]), (x2, line[0]*x2 + line[1])
 
-        line = (-9.6 - 10) / 1.4, 10
-        point = (1.4, -9.6)
-        for i in range(10):
-            print(line, intersections(line))
-            line = reflection(line, point)
-            points = intersections(line)
-            # TODO - need to round and do approximate equals to pick other point
-            # TODO   and/or change algorithm to automatically get other point
-            point = points[0] if point[1] != points[0][1] else points[1]
-            print("   point", point)
+        def other_point(point, points):
+            point0, point1 = points[0], points[1]
+            return point0 if (distance(point, point0) > distance(point, point1)) else point1
 
-        return 0
+        def distance(p1, p2):
+            return math.sqrt((p1[0]-p2[0])**2 + (p1[1]-p2[1])**2)
+
+        line = (-9.6 - 10.1) / 1.4, 10.1
+        point = (1.4, -9.6)
+        for bounce in count(1):
+            line = reflection(line, point)
+            point = other_point(point, intersections(line))
+            if -0.01 <= point[0] <= 0.01 and point[1] > 9.9:
+                break
+        return bounce
 
     @staticmethod
     def get_tests():
-        return []
+        return [(None, 354)]
 
 
 if __name__ == '__main__':
