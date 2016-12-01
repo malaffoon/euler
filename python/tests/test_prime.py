@@ -1,7 +1,7 @@
 import unittest
 import math
 
-from utils.prime import divisors, factors, phi, primes, is_prime, prime_factors
+from utils.prime import divisors, factors, phi, primes, is_prime, prime_factors, factors_grouped
 
 
 class PrimeTests(unittest.TestCase):
@@ -26,6 +26,16 @@ class PrimeTests(unittest.TestCase):
         self.assertEqual([2,2,3], list(factors(12)))
         self.assertEqual([5,7,13,29], list(factors(13195)))
         self.assertEqual([71,839,1471,6857], list(factors(600851475143)))
+
+    def test_factors_grouped(self):
+        self.assertEqual([(2,1)], factors_grouped(2))
+        self.assertEqual([(3,1)], factors_grouped(3))
+        self.assertEqual([(3,2)], factors_grouped(9))
+        self.assertEqual([(17,1)], factors_grouped(17))
+        self.assertEqual([(2,2),(3,1)], factors_grouped(12))
+        self.assertEqual([(2,1),(5,2)], factors_grouped(50))
+        self.assertEqual([(2,4),(5,4)], factors_grouped(10000))
+        self.assertEqual([(5,1),(7,1),(13,1),(29,1)], factors_grouped(13195))
 
     def test_prime_generator_problem(self):
         result = list(primes(math.ceil(math.sqrt(600851475143))))

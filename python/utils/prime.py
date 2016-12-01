@@ -9,6 +9,7 @@ import operator
 import threading
 from math import ceil, log, sqrt
 
+import collections
 
 __sieve_lock__ = threading.Lock()
 __sieve__ = [False, False, True, True, False, True, False, True, False, False, False]
@@ -46,6 +47,16 @@ def factors(value):
             break
     if value > 1:
         yield int(value)
+
+
+def factors_grouped(value):
+    """Returns a list of tuples with each unique prime factor and its exponent, for example:
+
+      | factors(50) = (2, 5, 5)
+      | factors_grouped(50) = [(2, 1), (5, 2)]
+    Groups are sorted ascending by factor.
+    """
+    return sorted(list(collections.Counter(factors(value)).items()), key=lambda t: t[0])
 
 
 def nth(n):
