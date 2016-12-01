@@ -23,13 +23,13 @@ class ContinuedFraction(object):
         """
         # pre-convergent and a0 convergent
         convergents = [(1, 0), (self.a0, 1)]
-        yield convergents[1]
+        yield convergents[-1]
         # convergents from subsequent terms
         for term in itertools.cycle(self.terms) if self.infinite else self.terms:
             convergents.append(
                 (term * convergents[-1][0] + convergents[-2][0], term * convergents[-1][1] + convergents[-2][1]))
             convergents.pop(0)
-            yield convergents[1]
+            yield convergents[-1]
 
     @staticmethod
     def forSqrtOf(n):
