@@ -1,6 +1,6 @@
 import math
 
-import itertools
+import itertools as it
 
 
 class ContinuedFraction(object):
@@ -12,8 +12,7 @@ class ContinuedFraction(object):
 
     def __repr__(self, *args, **kwargs):
         """Produces a string like [a0;a1,a2,a3] or [a0;(a1,a2,a3)] for infinite"""
-        return "[%d;%s%s%s]" % (
-        self.a0, "(" if self.infinite else "", ",".join(map(str, self.terms)), ")" if self.infinite else "")
+        return ("[%d;(%s)]" if self.infinite else "[%d;%s]") % (self.a0, ",".join(map(str, self.terms)))
 
     def convergents(self):
         """Return iterator of convergents
@@ -25,7 +24,7 @@ class ContinuedFraction(object):
         convergents = [(1, 0), (self.a0, 1)]
         yield convergents[-1]
         # convergents from subsequent terms
-        for term in itertools.cycle(self.terms) if self.infinite else self.terms:
+        for term in it.cycle(self.terms) if self.infinite else self.terms:
             convergents.append(
                 (term * convergents[-1][0] + convergents[-2][0], term * convergents[-1][1] + convergents[-2][1]))
             convergents.pop(0)
@@ -81,3 +80,11 @@ class ContinuedFraction(object):
             if a > precision_limit: break
             terms.append(a)
         return ContinuedFraction(a0, tuple(terms), False)
+
+    @staticmethod
+    def for_e(minn=100):
+        """Generate continued fraction for e
+
+        Because this is infinite and non-repeating, the minimum number of terms must be specified
+        """
+        return ContinuedFraction(2, list(it.chain.from_iterable((1, 2 * k, 1) for k in range(1, 1+int((minn+2)/3)))))

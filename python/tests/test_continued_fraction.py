@@ -19,3 +19,7 @@ class ContinuedFractionTests(unittest.TestCase):
         self.assertEqual([(0,1),(1,1),(5,6),(11,13),(27,32)], list(ContinuedFraction(0, (1,5,2,2)).convergents()))
         self.assertEqual([(1,1),(2,1),(5,3),(7,4),(19,11),(26,15),(71,41),(97,56)], list(itertools.islice(ContinuedFraction.forSqrtOf(3).convergents(), 0, 8)))
 
+    def test_e(self):
+        e = ContinuedFraction.for_e(10)
+        self.assertEqual("[2;1,2,1,1,4,1,1,6,1,1,8,1]", str(e))
+        self.assertEqual([(2,1),(3,1),(8,3),(11,4),(19,7),(87,32),(106,39),(193,71),(1264,465),(1457,536)], list(e.convergents())[:10])
