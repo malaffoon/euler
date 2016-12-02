@@ -5,6 +5,8 @@ from functools import reduce
 from itertools import count
 from math import gcd, sqrt
 
+from operator import mul
+
 
 def lcm(values):
     """Return the Least Common Multiple of an iterable of values
@@ -41,6 +43,14 @@ def digits(n):
     while n:
         yield n % 10
         n //= 10
+
+
+def prod(sequence):
+    """return the product of values from a sequence
+
+    Multiplication equivalent to sum()
+    """
+    return reduce(mul, sequence)
 
 
 def is_pandigital(s):
