@@ -64,34 +64,14 @@ PROBLEM18_DATA = [
 class Problem18(object):
     @staticmethod
     def solve(triangle=PROBLEM18_DATA):
-        # brute force generates all paths and find max
-        # i'll wait until problem 67 to figure out the efficient algorithm
-        return max(sum(p) for p in path_generator(triangle))
+        for r in range(1, len(triangle)):
+            for c in range(len(triangle[r])):
+                triangle[r][c] = triangle[r][c] + max(triangle[r - 1][max(0, c - 1):min(c, len(triangle[r])) + 1])
+        return max(triangle[-1])
 
     @staticmethod
     def get_tests():
         return [(PROBLEM18_DATA, 1074), (PROBLEM18_EXAMPLE, 23)]
-
-
-def path_generator(triangle):
-    # depth-first
-    rows = len(triangle)
-    pos = [0] * rows
-
-    def advance_pos():
-        for row in range(rows - 1, 0, -1):
-            if pos[row] <= len(triangle[row]) and pos[row] == pos[row - 1]:
-                pos[row] += 1
-                for reset in range(row + 1, rows):
-                    pos[reset] = pos[reset - 1]
-                return True
-        return False
-
-    # pos is the current path position in the triangle, an array of index values into triangle rows
-    while True:
-        yield (triangle[r][pos[r]] for r in range(rows))
-        if not advance_pos():
-            break
 
 
 if __name__ == '__main__':
