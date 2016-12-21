@@ -158,5 +158,8 @@ def phi(n):
     n which are relatively prime to n. For example, 1, 2, 4, 5, 7, 8 are less than 9 and
     relatively prime to 9 so phi(9) = 6. For any prime number all numbers less than n are
     relatively prime so phi(p) = p - 1.
+
+    This relies on a formula from the interwebs:
+      | φ(n) = n∏(1-1/p) where the product is over the distinct prime numbers dividing n
     """
-    return int(n * functools.reduce(operator.mul, map(lambda p: 1 - 1/p, set(factors(n))), 1))
+    return int(functools.reduce(operator.mul, map(lambda p: 1 - 1/p, set(factors(n))), n))

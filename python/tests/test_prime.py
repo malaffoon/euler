@@ -70,6 +70,8 @@ class PrimeTests(unittest.TestCase):
     def test_phi(self):
         self.assertEqual(6, phi(9))
         self.assertEqual(22, phi(23))
+        self.assertEqual(8313928, phi(8319823))
+        self.assertEqual(9701832, phi(9708131))
 
 if __name__ == '__main__':
     unittest.main()
