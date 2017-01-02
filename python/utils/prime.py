@@ -24,7 +24,7 @@ def __ensure_sieve__(limit):
                 __sieve__.extend([True] * (limit - len(__sieve__)))
                 for (i, flag) in enumerate(__sieve__):
                     if flag:
-                        for n in range(i*i, limit, i):
+                        for n in range(i * i, limit, i):
                             __sieve__[n] = False
     return __sieve__
 
@@ -42,11 +42,11 @@ def factors(value):
     for prime in primes(int(1 + sqrt(value))):
         while value > 1 and value % prime == 0:
             yield prime
-            value /= prime
-        if value == 1:
+            value //= prime
+        if value == 1 or value <= prime * prime:
             break
     if value > 1:
-        yield int(value)
+        yield value
 
 
 def factors_grouped(value):
@@ -66,8 +66,10 @@ def nth(n):
        * prime.nth(10) = 29
        * prime.nth(1000) = 7919
     """
+
     def guess_limit(n):
         return 30 if n < 10 else ceil(n * (log(n) + log(log(n))))
+
     return itertools.islice(primes(guess_limit(n)), n - 1, n).__next__()
 
 
@@ -112,6 +114,7 @@ _test_limits = [
     (341550071728321, (2, 3, 5, 7, 11, 13, 17))
 ]
 
+
 def _MillerRabin(n, _precision_for_large_n=16):
     if n in _known_primes: return True
     if any((n % p) == 0 for p in _known_primes): return False
@@ -123,12 +126,13 @@ def _MillerRabin(n, _precision_for_large_n=16):
     def _try_composite(a, d, n, s):
         if pow(a, d, n) == 1: return False
         for i in range(s):
-            if pow(a, 2**i * d, n) == n-1: return False
+            if pow(a, 2 ** i * d, n) == n - 1: return False
         return True
 
     for tl in _test_limits:
         if n < tl[0]: return not any(_try_composite(a, d, n, s) for a in tl[1])
     return not any(_try_composite(a, d, n, s) for a in _known_primes[:_precision_for_large_n])
+
 
 _known_primes = [2, 3]
 _known_primes += [x for x in range(5, 1000, 2) if _MillerRabin(x)]
@@ -141,13 +145,14 @@ def divisors(value):
     """
 
     def prod(values):
-        return functools.reduce(lambda x,y: x*y, values, 1)
+        return functools.reduce(lambda x, y: x * y, values, 1)
 
     # have to get primes as list so it can be reused in loop
     plist = list(factors(value))
 
     # run through set to dedup
-    result = list(set(prod(combo) for combo in itertools.chain.from_iterable(itertools.combinations(plist, l) for l in range(1, len(plist)+1))))
+    result = list(set(prod(combo) for combo in itertools.chain.from_iterable(
+        itertools.combinations(plist, l) for l in range(1, len(plist) + 1))))
     result.append(1)
     result.sort()
     return result
@@ -162,4 +167,4 @@ def phi(n):
     This relies on a formula from the interwebs:
       | φ(n) = n∏(1-1/p) where the product is over the distinct prime numbers dividing n
     """
-    return int(functools.reduce(operator.mul, map(lambda p: 1 - 1/p, set(factors(n))), n))
+    return int(functools.reduce(operator.mul, map(lambda p: 1 - 1 / p, set(factors(n))), n))
