@@ -11,8 +11,6 @@ Find the minimal path sum, in matrix.txt (right click and "Save Link/Target As..
 a 80 by 80 matrix, from the top left to the bottom right by moving left, right, up, and down.
 
 """
-import igraph
-
 TEST_DATA = [[131, 673, 234, 103, 18],
              [201, 96, 342, 965, 150],
              [630, 803, 746, 422, 111],
@@ -54,9 +52,9 @@ class Problem83(object):
                 for c in range(0, C):
                     n = min_neighbor(r, c)
                     if n is not None:
-                        if min_matrix[r][c] is None or matrix[r][c]+n < min_matrix[r][c]:
+                        if min_matrix[r][c] is None or matrix[r][c] + n < min_matrix[r][c]:
                             changes = True
-                            min_matrix[r][c] = matrix[r][c]+n
+                            min_matrix[r][c] = matrix[r][c] + n
         return min_matrix[-1][-1]
 
     @staticmethod
