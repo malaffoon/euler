@@ -1,7 +1,7 @@
 import unittest
 import math
 
-from utils.prime import divisors, factors, phi, primes, is_prime, prime_factors, factors_grouped
+from utils.prime import divisors, factors, phi, primes, is_prime, prime_factors, factors_grouped, nth
 
 
 class PrimeTests(unittest.TestCase):
@@ -72,6 +72,12 @@ class PrimeTests(unittest.TestCase):
         self.assertEqual(22, phi(23))
         self.assertEqual(8313928, phi(8319823))
         self.assertEqual(9701832, phi(9708131))
+
+    def test_nth(self):
+        self.assertEqual(29, nth(10))
+        self.assertEqual(541, nth(100))
+        self.assertEqual(7919, nth(1000))
+        self.assertEqual(104743, nth(10001))
 
 if __name__ == '__main__':
     unittest.main()
