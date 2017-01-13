@@ -9,28 +9,25 @@ It is possible to make £2 in the following way:
 1×£1 + 1×50p + 2×20p + 1×5p + 1×2p + 3×1p
 
 How many different ways can £2 be made using any number of coins?
+
+
+NOTE: same as problem 76
 """
 
 
 class Problem31(object):
     @staticmethod
-    def solve():
-        # denominations
-        denoms = [1, 2, 5, 10, 20, 50, 100, 200]
-
-        def count_combos_for(amount, max_denom):
-            if max_denom == 1: return 1
-            # count = 0
-            # for denom in (denom for denom in denoms if denom <= max_denom and denom <= amount):
-            #     count += 1 if denom == amount else count_combos_for(amount - denom, denom)
-            # return count
-            return sum(1 if denom == amount else count_combos_for(amount - denom, denom) for denom in denoms if denom <= max_denom and denom <= amount)
-
-        return count_combos_for(200, 200)
+    def solve(N=200):
+        coins = [1, 2, 5, 10, 20, 50, 100, 200]
+        combos = [1] + [0] * N
+        for coin in coins:
+            for i in range(coin, N+1):
+                combos[i] += combos[i-coin]
+        return combos[N]
 
     @staticmethod
     def get_tests():
-        return [(None, 73682)]
+        return [(None, 73682), (2, 2), (5, 4)]
 
 
 if __name__ == '__main__':
