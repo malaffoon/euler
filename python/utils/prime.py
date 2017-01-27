@@ -3,13 +3,12 @@
 TODO - consider Sieve of Atkin or other modern improvement
 """
 
+import collections
 import functools
 import itertools
 import operator
 import threading
 from math import ceil, log, sqrt
-
-import collections
 
 __sieve_lock__ = threading.Lock()
 __sieve__ = [False, False, True, True, False, True, False, True, False, False, False]
@@ -27,6 +26,56 @@ def __ensure_sieve__(limit):
                         for n in range(i * i, limit, i):
                             __sieve__[n] = False
     return __sieve__
+
+
+def rabin_primes(limit):
+    """Generate primes using MillerRabin for prime test
+
+    This is 40x slower than Sieve of Eratosthenes but doesn't use as much memory.
+    """
+    for n in range(2, limit):
+        if _MillerRabin(n): yield n
+
+
+def atkin_primes(limit):
+    """Generate primes using Sieve of Atkin
+
+    Clearly i'm doing something wrong here because this is much slower than Sieve of Eratosthenes.
+    And it scales as n*log(n) i think (!)
+    """
+    def wheel():
+        for w in range(0, limit // 60 + 1):
+            for x in [1, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 49, 53, 59]:
+                n = 60 * w + x
+                if n >= limit: break
+                yield 60 * w + x
+
+    isprime = [True] * limit
+    for n in wheel(): isprime[n] = False
+
+    for x in range(1, ceil(sqrt(limit/4)), 1):
+        for y in range(1, ceil(sqrt(limit - 4 * x * x)), 2):
+            n = 4 * x * x + y * y
+            if n < limit and n % 60 in {1, 13, 17, 29, 37, 41, 49, 53}:
+                isprime[n] = not isprime[n]
+    for x in range(1, ceil(sqrt(limit/3)), 2):
+        for y in range(2, ceil(sqrt(limit - 3 * x * x)), 2):
+            n = 3 * x * x + y * y
+            if n < limit and n % 60 in {7, 19, 31, 43}:
+                isprime[n] = not isprime[n]
+    for x in range(2, ceil(sqrt(limit/2)), 1):
+        for y in range(x-1, 0, -2):
+            n = 3 * x * x - y * y
+            if n < limit and n % 60 in {11, 23, 47, 59}:
+                isprime[n] = not isprime[n]
+
+    for n in wheel():
+        if n >=7 and n*n < limit and isprime[n]:
+            for c in wheel():
+                cn2 = c * n * n
+                if cn2 < limit: isprime[cn2] = False
+
+    return [2,3,5] + sorted(filter(lambda p: 7 <= p < limit and isprime[p], wheel()))
 
 
 def prime_factors(value):
@@ -74,7 +123,7 @@ def nth(n):
 
 
 def primes(limit):
-    """Generate primes less than limit"""
+    """Generate primes less than limit using Sieve of Eratosthenes"""
     for (i, flag) in enumerate(__ensure_sieve__(limit)[:limit]):
         if flag: yield i
 
@@ -84,22 +133,7 @@ def is_prime(value):
 
     Note: returns false for 0 and 1
     """
-
-    if value <= 1: return False
-    # use existing sieve values for quick answer
-    if value < len(__sieve__): return __sieve__[value]
-
-    # There have been a few iterations of this method.
-    #
-    # First one simply used the sieve calculated to the value, something like:
-    #   return __ensure_sieve__(value + 1)[value]
-    #
-    # Next it used the sieve is already calculated but avoided taking the big hit
-    # of calculating the sieve all the way up to the number by dividing up to sqrt:
-    #   return all(value % p != 0 for p in primes(1 + ceil(sqrt(value))))
-    #
-    # Still too slow, so time for Miller-Rabin
-    return _MillerRabin(value)
+    return False if value <= 1 else _MillerRabin(value)
 
 
 # for small n, we can limit the a's to test (https://en.wikipedia.org/wiki/Miller%E2%80%93Rabin_primality_test)
