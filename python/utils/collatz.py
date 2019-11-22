@@ -18,6 +18,15 @@ def generator(value):
         value = next_collatz(value)
 
 
+def length(n):
+    """Return length of the Collatz sequence for a number"""
+    result = 0
+    while n:
+        result += 1
+        n = None if n == 1 else int(n/2) if n % 2 == 0 else 3 * n + 1
+    return result
+
+
 def reverse(limit):
     """Reverse-generate collatz sequences.
 

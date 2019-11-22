@@ -25,7 +25,7 @@ class Problem14(object):
         lengths = {1: 1, 2: 2, 4: 3, 8: 4, 16: 5}  # value -> collatz sequence length
         longest = 5
         max_value = 16
-        for v in range(1000000):
+        for v in range(500000, 1000000):
             l = 0
             c = v
             while c:
@@ -33,20 +33,21 @@ class Problem14(object):
                     l += lengths[c]
                     lengths[v] = l
                     if l > longest:
+                        print("new longest value", v, l)
                         longest = l
                         max_value = v
                     break
                 l += 1
-                c = collatz.next_collatz(c)
+                c = (None if c == 1 else int(c/2) if c % 2 == 0 else 3 * c + 1)
         return max_value
 
     @staticmethod
     def solve2():
-        # brute force it, takes about 30 seconds to run on my laptop
+        # brute force it, takes about 15 seconds to run on my laptop
         longest = 0
         max_value = 0
-        for v in range(1000000):
-            l = sum(1 for _ in collatz.generator(v))
+        for v in range(500000, 1000000):
+            l = collatz.length(v)
             if l > longest:
                 print("new longest value", v, l)
                 longest = l
@@ -59,4 +60,5 @@ class Problem14(object):
 
 
 if __name__ == '__main__':
-    print("The starting number, under one million, that produces the longest Collatz sequence is", Problem14().solve())
+    Problem14.solve()
+    # print("The starting number, under one million, that produces the longest Collatz sequence is", Problem14().solve())
