@@ -160,7 +160,7 @@ class Problem84(object):
 
     @staticmethod
     def get_tests():
-        return [(None, 101524), (roll2d6, 102400)]
+        return [(None, '101524')]
 
 
 if __name__ == '__main__':

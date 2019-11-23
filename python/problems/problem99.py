@@ -32,7 +32,7 @@ class Problem99(object):
 
     @staticmethod
     def get_tests():
-        return [(None, 0)]
+        return [(None, 709)]
 
 
 if __name__ == '__main__':
