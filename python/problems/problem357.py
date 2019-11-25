@@ -7,6 +7,8 @@ Find the sum of all positive integers n not exceeding 100 000 000
 such that for every divisor d of n, d + n/d is prime.
 """
 import operator
+import cProfile
+import timeit
 
 from itertools import combinations
 from functools import reduce
@@ -29,33 +31,45 @@ class Problem357(object):
         all primes up to max_n, then use the rules (4x+2, n+1 must be prime,
         etc.) to filter down the list.
 
-        This approach takes 6-7m to solve.
+        Also replaced the generator with the prime sieve array.
+
+        This approach still takes ~5m to solve.
 
         :param max_n:
         :return:
         """
-        # build a local sieve array
-        primes = [False] * (max_n+1)
-        for p in prime.primes(max_n+1):
-            primes[p] = True
+        prime_sieve = prime.prime_sieve(max_n+1)
+
+        def _factors(n):
+            from math import sqrt
+            factors = []
+            for p in range(2, int(1+sqrt(n))):
+                if not prime_sieve[p]: continue
+                while n > 1 and n % p == 0:
+                    factors.append(p)
+                    n //= p
+                if n == 1 or n <= p*p: break
+            if n > 1:
+                factors.append(n)
+            return factors
 
         sum = 1
-        for p in range(2, len(primes)):
-            if not primes[p]: continue
+        for p in range(2, max_n+1):
+            if not prime_sieve[p]: continue
             n = p - 1
 
             # n = 4x + 2
             if (n-2) % 4 != 0: continue
 
             # singular prime factors
-            factor_list = list(prime.factors(n))
+            factor_list = _factors(n)
             if len(factor_list) > len(set(factor_list)): continue
 
             # no more short cuts, time to do the work
             divs = list(prime.factors_to_divisors(factor_list))
             len_divs = len(divs)
             # we only have to check the first half of the divisors since d+n/d is symmetric
-            if all(primes[d + n // d] for d in divs[:len_divs//2]):
+            if all(prime_sieve[d + n // d] for d in divs[:len_divs//2]):
                 sum += n
         return sum
 
@@ -143,4 +157,6 @@ class Problem357(object):
 
 
 if __name__ == '__main__':
-    print("The answer is", Problem357.solve(10000))
+    # cProfile.run('Problem357.solve3(1000000)')
+    # print(timeit.timeit('Problem357().solve3(100000000)', setup='from problems.problem357 import Problem357', number=1))
+    print("The answer is", Problem357.solve(100000))

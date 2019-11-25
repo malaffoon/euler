@@ -116,7 +116,6 @@ def nth(n):
        * prime.nth(10) = 29
        * prime.nth(1000) = 7919
     """
-
     def guess_limit(n):
         return 30 if n < 10 else ceil(n * (log(n) + log(log(n))))
 
@@ -127,6 +126,17 @@ def primes(limit):
     """Generate primes less than limit using Sieve of Eratosthenes"""
     for (i, flag) in enumerate(__ensure_sieve__(limit)[:limit]):
         if flag: yield i
+
+
+def prime_sieve(limit):
+    """The generator (primes) is good when you don't know how many values you
+    need, but you can get a populated sieve array if you need it. The array is
+    the underlying sieve array, so don't mess with it, make a copy if needed.
+
+    :param limit:
+    :return: array of bools, [False,False,True,True,False,...]
+    """
+    return __ensure_sieve__(limit)
 
 
 def is_prime(value):
