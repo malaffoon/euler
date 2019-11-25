@@ -43,6 +43,7 @@ def atkin_primes(limit):
     Clearly i'm doing something wrong here because this is much slower than Sieve of Eratosthenes.
     And it scales as n*log(n) i think (!)
     """
+
     def wheel():
         for w in range(0, limit // 60 + 1):
             for x in [1, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 49, 53, 59]:
@@ -53,29 +54,29 @@ def atkin_primes(limit):
     isprime = [True] * limit
     for n in wheel(): isprime[n] = False
 
-    for x in range(1, ceil(sqrt(limit/4)), 1):
+    for x in range(1, ceil(sqrt(limit / 4)), 1):
         for y in range(1, ceil(sqrt(limit - 4 * x * x)), 2):
             n = 4 * x * x + y * y
             if n < limit and n % 60 in {1, 13, 17, 29, 37, 41, 49, 53}:
                 isprime[n] = not isprime[n]
-    for x in range(1, ceil(sqrt(limit/3)), 2):
+    for x in range(1, ceil(sqrt(limit / 3)), 2):
         for y in range(2, ceil(sqrt(limit - 3 * x * x)), 2):
             n = 3 * x * x + y * y
             if n < limit and n % 60 in {7, 19, 31, 43}:
                 isprime[n] = not isprime[n]
-    for x in range(2, ceil(sqrt(limit/2)), 1):
-        for y in range(x-1, 0, -2):
+    for x in range(2, ceil(sqrt(limit / 2)), 1):
+        for y in range(x - 1, 0, -2):
             n = 3 * x * x - y * y
             if n < limit and n % 60 in {11, 23, 47, 59}:
                 isprime[n] = not isprime[n]
 
     for n in wheel():
-        if n >=7 and n*n < limit and isprime[n]:
+        if n >= 7 and n * n < limit and isprime[n]:
             for c in wheel():
                 cn2 = c * n * n
                 if cn2 < limit: isprime[cn2] = False
 
-    return [2,3,5] + sorted(filter(lambda p: 7 <= p < limit and isprime[p], wheel()))
+    return [2, 3, 5] + sorted(filter(lambda p: 7 <= p < limit and isprime[p], wheel()))
 
 
 def prime_factors(value):
@@ -177,19 +178,27 @@ def divisors(value):
 
         divisors(12) = [1, 2, 3, 4, 6, 12]
     """
+    return sorted(list(factors_to_divisors(factors(value))))
 
-    def prod(values):
-        return functools.reduce(lambda x, y: x * y, values, 1)
 
-    # have to get primes as list so it can be reused in loop
-    plist = list(factors(value))
+def factors_to_divisors(factors):
+    """Expands the factors to the full divisors list
+    For example factors_to_divisors((2,5,5)) = (1, 2, 5, 10, 25, 50)
 
-    # run through set to dedup
-    result = list(set(prod(combo) for combo in itertools.chain.from_iterable(
-        itertools.combinations(plist, l) for l in range(1, len(plist) + 1))))
-    result.append(1)
-    result.sort()
-    return result
+    Because the response is an unordered iterator you probably want to do:
+    divisors = sorted(list(factors_to_divisors(factors(value))))
+    (or just use the divisors(value) method)
+
+    :param factors: list of factors
+    :return: iter of divisors, in no particular order
+    """
+    # Algorithm:
+    # 1. Convert list of factors into grouped factors (2,5,5) -> [(2,1),(5,2)]
+    # 2. Expand each into a tuple exponentiated values        -> [(1,2),(1,5,25)]
+    # 3. Generate the cross product of the tuples             -> [(1,1),(1,5),(1,25),(2,1),(2,5),(2,25)]
+    # 4. Reduce each tuple to the multiplied values           -> [1,5,25,2,10,50]
+    return (functools.reduce(operator.mul, t, 1) for t in itertools.product(
+                *(tuple(p ** e for e in range(n + 1)) for (p, n) in collections.Counter(factors).items())))
 
 
 def phi(n):
