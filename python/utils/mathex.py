@@ -110,3 +110,22 @@ def octagonal(n):
 def is_octagonal(v):
     n = (sqrt(4 + 12 * v) + 2) / 6
     return int(n) if n.is_integer() else None
+
+
+def isqrt(n):
+    """An integer sqrt function for use before python 3.8 which has it builtin.
+    NOTE: this returns the largest integer that is less than or equal to the
+    square root. You must check the return value to see if it is exactly the
+    square root.
+    """
+    if n > 0:
+        x = 1 << (n.bit_length() + 1 >> 1)
+        while True:
+            y = (x + n // x) >> 1
+            if y >= x:
+                return x
+            x = y
+    elif n == 0:
+        return 0
+    else:
+        raise ValueError("square root not defined for negative numbers")

@@ -63,6 +63,15 @@ class MathTests(unittest.TestCase):
         self.assertEqual(165, m.is_pentagonal(40755))
         self.assertEqual(143, m.is_hexagonal(40755))
 
+    def test_isqrt(self):
+        self.assertEqual(10, m.isqrt(100))
+        self.assertEqual(169, m.isqrt(28561))
+        self.assertEqual(28561, m.isqrt(815730721))
+        self.assertEqual(815730721, m.isqrt(665416609183179841))
+        self.assertEqual(665416609183179841, m.isqrt(442779263776840698304313192148785281))
+        self.assertEqual(10, m.isqrt(110))
+        self.assertEqual(169, m.isqrt(28600))
+
 
 if __name__ == '__main__':
     unittest.main()

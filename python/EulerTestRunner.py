@@ -4,6 +4,8 @@ A testable problem class shall have two methods:
   | solve(args) - returns a single value, accepts zero or one args
   | get_tests() = returns [(args, expected), ...]
 get_tests() should return the problem/solution first, then any examples or extra tests.
+If a problem hasn't been solved, get_tests() may return [(None, None)] and the runner
+will skip the tests.
 
 Note that a solver that requires multiple arguments cannot be run. The problem solution
 can be tested in that case by having default argument values and returning [(None, expected)]
@@ -60,7 +62,7 @@ class EulerTestRunner(object):
     def _run_testable(self, testable):
         """Run a single testable object, emitting results"""
         tests = testable.get_tests()
-        if len(tests) == 0:
+        if len(tests) == 0 or all(arg is None and expected is None for arg,expected in tests):
             print('%s - no tests' % testable.__class__.__name__)
             return 0
 
