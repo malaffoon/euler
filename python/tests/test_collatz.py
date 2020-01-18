@@ -18,5 +18,6 @@ class CollatzTests(unittest.TestCase):
         self.assertEqual(7935, len(reverse(30)))
         # self.assertEqual(2461388, len(reverse(50)))
 
+
 if __name__ == '__main__':
     unittest.main()

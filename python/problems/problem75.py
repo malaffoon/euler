@@ -45,8 +45,8 @@ class Problem75(object):
     def solve():
         limit = 1500000
         combos = [0] * limit
-        for n in range(1, 1000):
-            for m in range(n+1, 1000, 1 if n%2==0 else 2):
+        for m in range(2, 1000):
+            for n in range(1 if m % 2 == 0 else 2, m, 2):
                 if gcd(m,n) != 1: continue
                 L = 2*m*(m+n) # a + b + c
                 for i in range(L, limit, L):
