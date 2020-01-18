@@ -48,8 +48,7 @@ class Problem75(object):
         for n in range(1, 1000):
             for m in range(n+1, 1000, 1 if n%2==0 else 2):
                 if gcd(m,n) != 1: continue
-                # a + b + c
-                L = m*m - n*n + 2*m*n + m*m + n*n
+                L = 2*m*(m+n) # a + b + c
                 for i in range(L, limit, L):
                     combos[i] += 1
 
