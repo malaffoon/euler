@@ -22,7 +22,7 @@ impl Sieve {
     /// Return all primes up to the given value.
     ///
     /// # Arguments
-    /// `limit` - the maximum value
+    /// `limit` - the maximum value, returns all primes less than this value
     ///
     /// # Examples
     /// ```
@@ -32,7 +32,9 @@ impl Sieve {
     /// ```
     pub fn primes(&self, limit: usize) -> Vec<u64> {
         self._ensure_limit(limit).iter().enumerate()
-            .filter_map(|(i, flag)| if *flag { Some(i as u64) } else { None })
+            .filter(|(_, flag)| **flag)
+            .take_while(|(i, _)| *i < limit)
+            .map(|(i, _)| i as u64)
             .collect::<Vec<u64>>()
     }
 
@@ -66,7 +68,13 @@ impl Sieve {
     /// assert_eq!(sieve.nth_prime(1000), 7919);
     /// ```
     pub fn nth_prime(&self, n: usize) -> u64 {
-        self._ensure_limit(Sieve::_estimate_limit(n)).iter().enumerate()
+        // this produces a value greater than the nth prime
+        let limit: usize = if n < 10 { 30 } else {
+            let n: f32 = n as f32;
+            (n * (n.ln() + n.ln().ln())).ceil() as usize
+        };
+
+        self._ensure_limit(limit).iter().enumerate()
             .filter(|(_, flag)| **flag)
             .skip(n-1)
             .next().unwrap().0 as u64
@@ -126,15 +134,6 @@ impl Sieve {
         }
         self._sieve.borrow()
     }
-
-    fn _estimate_limit(n: usize) -> usize {
-        if n < 10 {
-            30
-        } else {
-            let n: f32 = n as f32;
-            (n * (n.ln() + n.ln().ln())).ceil() as usize
-        }
-    }
 }
 
 #[cfg(test)]
@@ -145,7 +144,8 @@ mod tests {
     fn test_primes() {
         let sieve = Sieve::new();
         assert_eq!(sieve.primes(10), vec![2, 3, 5, 7]);
-        assert_eq!(sieve.primes(30), vec![2, 3, 5, 7, 11, 13, 17, 19, 23, 29])
+        assert_eq!(sieve.primes(30), vec![2, 3, 5, 7, 11, 13, 17, 19, 23, 29]);
+        assert_eq!(sieve.primes(20), vec![2, 3, 5, 7, 11, 13, 17, 19]);
     }
 
     #[test]
