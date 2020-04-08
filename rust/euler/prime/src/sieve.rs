@@ -1,5 +1,5 @@
-use std::cell::{ RefCell, Ref };
 use bitvec::prelude::*;
+use std::cell::{Ref, RefCell};
 
 // TODO - thread safety; use RwLock instead of RefCell?
 pub struct Sieve {
@@ -8,13 +8,21 @@ pub struct Sieve {
 
 // TODO - introduce a Primes interface? Useful for Atkins, Miller-Rabin, whatever
 
+impl Default for Sieve {
+    fn default() -> Self {
+        Sieve::new_with_limit(10)
+    }
+}
+
 impl Sieve {
     pub fn new() -> Sieve {
-        Sieve::new_with_limit(10)
+        Sieve::default()
     }
 
     pub fn new_with_limit(limit: usize) -> Sieve {
-        let sieve = Sieve { _sieve: RefCell::new(bitvec![0, 0, 1, 1, 0, 1, 0, 1, 0, 0]) };
+        let sieve = Sieve {
+            _sieve: RefCell::new(bitvec![0, 0, 1, 1, 0, 1, 0, 1, 0, 0]),
+        };
         sieve._ensure_limit(limit);
         sieve
     }
@@ -31,7 +39,9 @@ impl Sieve {
     /// assert_eq!(sieve.primes(30), vec![2, 3, 5, 7, 11, 13, 17, 19, 23, 29]);
     /// ```
     pub fn primes(&self, limit: usize) -> Vec<u64> {
-        self._ensure_limit(limit).iter().enumerate()
+        self._ensure_limit(limit)
+            .iter()
+            .enumerate()
             .filter(|(_, flag)| **flag)
             .take_while(|(i, _)| *i < limit)
             .map(|(i, _)| i as u64)
@@ -69,15 +79,19 @@ impl Sieve {
     /// ```
     pub fn nth_prime(&self, n: usize) -> u64 {
         // this produces a value greater than the nth prime
-        let limit: usize = if n < 10 { 30 } else {
+        let limit: usize = if n < 10 {
+            30
+        } else {
             let n: f32 = n as f32;
             (n * (n.ln() + n.ln().ln())).ceil() as usize
         };
 
-        self._ensure_limit(limit).iter().enumerate()
+        self._ensure_limit(limit)
+            .iter()
+            .enumerate()
             .filter(|(_, flag)| **flag)
-            .skip(n-1)
-            .next().unwrap().0 as u64
+            .nth(n - 1)
+            .unwrap().0 as u64
     }
 
     /// Return the prime factors of the given number.
@@ -102,7 +116,10 @@ impl Sieve {
             // TODO - this calculates all primes up to sqrt even if not necessary
             // TODO   e.g. performance impact for problem 3
             for (p, _) in self._ensure_limit(1 + (n as f32).sqrt().floor() as usize)
-                .iter().enumerate().filter(|(_, flag)| **flag) {
+                .iter()
+                .enumerate()
+                .filter(|(_, flag)| **flag)
+            {
                 let prime: u64 = p as u64;
                 while value > 1 && value % prime == 0 {
                     factors.push(prime);
@@ -126,8 +143,8 @@ impl Sieve {
             sieve.resize(limit, true);
             for i in 2..limit {
                 if sieve[i] {
-                    for j in (i*i..limit).step_by(i) {
-                        sieve.set(j,false);
+                    for j in (i * i..limit).step_by(i) {
+                        sieve.set(j, false);
                     }
                 }
             }
@@ -142,7 +159,7 @@ mod tests {
 
     #[test]
     fn test_primes() {
-        let sieve = Sieve::new();
+        let sieve = Sieve::default();
         assert_eq!(sieve.primes(10), vec![2, 3, 5, 7]);
         assert_eq!(sieve.primes(30), vec![2, 3, 5, 7, 11, 13, 17, 19, 23, 29]);
         assert_eq!(sieve.primes(20), vec![2, 3, 5, 7, 11, 13, 17, 19]);
@@ -158,10 +175,10 @@ mod tests {
 
     #[test]
     fn test_nth_prime() {
-        let sieve = Sieve::new();
-        assert_eq!(sieve.nth_prime(1000), 7919);
-        assert_eq!(sieve.nth_prime(10), 29);
+        let sieve = Sieve::new_with_limit(1000);
         assert_eq!(sieve.nth_prime(3), 5);
+        assert_eq!(sieve.nth_prime(10), 29);
+        assert_eq!(sieve.nth_prime(1000), 7919);
     }
 
     #[test]

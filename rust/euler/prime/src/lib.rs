@@ -1,3 +1,3 @@
 mod sieve;
 
-pub use sieve::{Sieve};
+pub use sieve::Sieve;
