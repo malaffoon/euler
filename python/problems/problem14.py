@@ -12,12 +12,13 @@
 
    Which starting number, under one million, produces the longest chain?
 """
-
+import numba
 from utils import collatz
 
 
 class Problem14(object):
     @staticmethod
+    @numba.njit
     def solve():
         # this solution caches lengths to short-circuit calculations
         # it gets the answer in 3-4 seconds on my laptop
@@ -29,7 +30,7 @@ class Problem14(object):
         for v in range(500000, 1000000):
             l = 0
             c = v
-            while c:
+            while c is not None:
                 if c in lengths:
                     l += lengths[c]
                     lengths[v] = l

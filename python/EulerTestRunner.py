@@ -7,9 +7,9 @@ get_tests() should return the problem/solution first, then any examples or extra
 If a problem hasn't been solved, get_tests() may return [(None, None)] and the runner
 will skip the tests.
 
-Note that a solver that requires multiple arguments cannot be run. The problem solution
-can be tested in that case by having default argument values and returning [(None, expected)]
-from get_tests().
+Note that a solver that requires multiple arguments cannot be run. There are two ways to get
+around this: for the simplest cases, have default argument values and provide None as the
+argument, e.g. [(None, expected)]; provide a tuple as the argument, e.g. [((123, 1), expected)]
 
 Note that problems that have external resource files may have some issues.
 
@@ -70,7 +70,7 @@ class EulerTestRunner(object):
         failures = 0
         for (arg, expected) in tests:
             with EulerTimer() as t:
-                actual = testable.solve(arg) if arg else testable.solve()
+                actual = testable.solve(*arg) if isinstance(arg, tuple) else testable.solve(arg) if arg else testable.solve()
 
             if actual == expected:
                 output.append(' Success in %s: %s = solve(%s)' % (str(t), expected, arg if arg else ''))

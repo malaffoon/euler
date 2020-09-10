@@ -1,8 +1,9 @@
 # Project Euler 
 
 This project is me using Project Euler (https://projecteuler.net/) to learn Python.
+* TODO - get Numba working with some of the utils modules
 * Started but not solved: 100, 493
-* 5% problems remaining: 684, 686, 700
+* 5% problems remaining: 684
 * 10% problems remaining: 493, 650, 692, 710
 
 
@@ -39,4 +40,20 @@ euler/python/problems$ PYTHONPATH=.. python ../EulerTestRunner.py
 
 # to run just a couple problems:
 euler/python/problems$ PYTHONPATH=.. python ../EulerTestRunner.py 2 7
+```
+
+## Performance - Numba
+Many of the solutions involve looping and some non-native math. As such they
+can benefit GREATLY from Numba (https://numba.pydata.org/). Note that the test
+runner doesn't warm up the methods, so the JIT compilation is included in the
+performance numbers. Usually not a big deal.
+
+As an example, i first used Numba for problem 686. Apart from using range() 
+instead of count() i made no code changes. Before Numba it took almost 40s to
+run the tests (three trivial tests and the final solution). With Numba, the
+final solution took 240ms ... yes, 120x faster. 
+
+Obviously you need Numba in the python environment, to install:
+```
+pip install numba
 ```
