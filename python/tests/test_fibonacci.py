@@ -40,5 +40,6 @@ class FibonacciTests(unittest.TestCase):
         for i in range(1,50):
             self.assertEqual(0, fibn(i)-fibn2(i))
 
+
 if __name__ == '__main__':
     unittest.main()

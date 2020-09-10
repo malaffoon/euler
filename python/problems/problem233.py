@@ -74,7 +74,7 @@ class Problem233(object):
     def helper(maxT=pow(10, 22) / 2, betas=(6, 4, 2)):
         # we know the first three p_primes are 5, 13, 17 so smallest candidate can be calculated:
         smallest_candidate = reduce(mul, map(lambda t: pow(t[0], t[1]), zip((5, 13, 17), betas)))
-        print(smallest_candidate)
+        # print(smallest_candidate)
 
         # create list of allowed multipliers (2 to odd exponents, 'q' primes to exponent 2,4,6...)
         # the most we can multiple the smallest by and stay under the problem limit
@@ -92,7 +92,7 @@ class Problem233(object):
             multipliers.append(t)
             multipliers.extend(p for p in (t*m for m in q_multipliers) if p <= multiplier_limit)
         multipliers.sort()
-        print(len(multipliers), multipliers)
+        # print(len(multipliers), multipliers)
 
         def count_em(base):
             c = 0
@@ -123,7 +123,7 @@ class Problem233(object):
                         p2f = p1f * pow(p2, betas[2])
                         result = count_em(p2f)
                         countN, sumN = countN + result[0], sumN + result[1]
-        print("count =", countN, ", sum = ", sumN)
+        # print("count =", countN, ", sum = ", sumN)
         return countN, sumN
 
     @staticmethod

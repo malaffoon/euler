@@ -22,11 +22,10 @@ class Fibonacci(object):
             raise ValueError('Either value or count must have a limit set')
         self.max_value = max_value
         self.max_count = max_count
+        self.count = 0
+        self.prev, self.curr = 0, 1
 
     def __iter__(self):
-        self.count = 0
-        self.prev = 0
-        self.curr = 1
         return self
 
     def __next__(self):
@@ -37,7 +36,6 @@ class Fibonacci(object):
         self.count += 1
         self.prev, self.curr = self.curr, self.prev+self.curr
         return self.prev
-    next = __next__  # p2 compatibility
 
 
 def fibgen(max_value=None, max_count=10):

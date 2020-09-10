@@ -62,7 +62,7 @@ class EulerTestRunner(object):
     def _run_testable(self, testable):
         """Run a single testable object, emitting results"""
         tests = testable.get_tests()
-        if len(tests) == 0 or all(arg is None and expected is None for arg,expected in tests):
+        if len(tests) == 0 or all(arg is None and expected is None for arg, expected in tests):
             print('%s - no tests' % testable.__class__.__name__)
             return 0
 
@@ -78,7 +78,9 @@ class EulerTestRunner(object):
                 failures += 1
                 output.append(' FAILURE: solve(%s) = %s, expected: %s' % (arg if arg else '', actual, expected))
 
-            if not self.run_extra_tests: break
+            if not self.run_extra_tests:
+                break
+
         print('\n'.join(output) if self.run_extra_tests else ' - '.join(output))
         return failures
 

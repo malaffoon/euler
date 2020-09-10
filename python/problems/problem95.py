@@ -47,7 +47,7 @@ class Problem95(object):
                     i = chain.index(c)
                     if len(chain)-i > len(longest):
                         longest = chain[i:]
-                        print(n, longest)
+                        # print(n, longest)
                     break
                 chain.append(c)
             for c in chain:

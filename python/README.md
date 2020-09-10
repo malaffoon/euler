@@ -1,8 +1,9 @@
 # Project Euler 
 
 This project is me using Project Euler (https://projecteuler.net/) to learn Python.
-* Start but not solved: 100, 493
-* 10% problems remaining: 493, 650
+* Started but not solved: 100, 493
+* 5% problems remaining: 684, 686, 700
+* 10% problems remaining: 493, 650, 692, 710
 
 
 ## Running
