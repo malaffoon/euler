@@ -3,7 +3,6 @@
 This project is me using Project Euler (https://projecteuler.net/) to learn Python.
 * TODO - get Numba working with some of the utils modules
 * Started but not solved: 100, 493
-* 5% problems remaining: 684
 * 10% problems remaining: 493, 650, 692, 710
 
 
