@@ -15,18 +15,20 @@ are chosen from the 60 other-colored balls. The probability of this happening is
 So the odds that the color IS in the solution is (1 - 60C20 / 70C20). Adding that up for all 7 colors
 gives the final answer.
 
-Because python is nice, we don't need to do anything special for nCr.
+Because python is nice, we could easily write a nCr function:
+    def nCr(n,r):
+        return int(math.factorial(n) / math.factorial(r) / math.factorial(n-r))
+
+But we could also just hard-code the answer by reducing the factorial math.
 """
-import math
+from functools import reduce
+from operator import mul
 
 
 class Problem493(object):
     @staticmethod
     def solve():
-        def nCr(n,r):
-            return int(math.factorial(n) / math.factorial(r) / math.factorial(n-r))
-
-        return 7 * (1 - nCr(60, 20) / nCr(70, 20))
+        return 7 * (1 - reduce(mul, range(50, 40, -1), 1) / reduce(mul, range(70, 60, -1), 1))
 
     @staticmethod
     def get_tests():
