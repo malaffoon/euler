@@ -2,9 +2,10 @@
 
 This project is me using Project Euler (https://projecteuler.net/) to learn Python.
 * TODO - get Numba working with some of the utils modules
+* TODO - use problem interface, clean up runner
 * Started but not solved: 100, 650
 * 10% problems remaining: 650, 692, 710
-* Problem remaining in 1-100: 78, 86, 88, 93, 94, 98, 100
+* Problem remaining in 1-100: 86, 88, 93, 94, 98, 100
 
 
 ## Running
