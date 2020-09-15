@@ -37,7 +37,7 @@ def generator(limit: int = None, primitive: bool = True):
             a, b, c = m*m-n*n, 2*m*n, m*m+n*n
             yield a, b, c
             if not primitive:
-                for k in range(2, limit // s):
+                for k in range(2, 1 + limit // s):
                     yield k*a, k*b, k*c
 
 
