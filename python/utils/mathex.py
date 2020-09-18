@@ -129,3 +129,30 @@ def isqrt(n):
         return 0
     else:
         raise ValueError("square root not defined for negative numbers")
+
+
+_pell_smallest = (None,
+                  None, (3, 2), (2, 1), None, (9, 4), (5, 2), (8, 3), (3, 1), None, (19, 6),
+                  (10, 3), (7, 2), (649, 180), (15, 4), (4, 1), None, (33, 8), (17, 4), (170, 39), (9, 2)
+                  )
+
+
+def pell_gen(n: int) -> (int, int):
+    """A generator for infinite sequences generated from the solutions to Pell's equation
+    for the given n. Please see https://en.wikipedia.org/wiki/Pell%27s_equation.
+
+    This only works for Pell's equation with a known fundamental solution for n.
+    Obviously, you can expand the list by transcribing values from wikipedia.
+
+    Note that the degenerate solution (1,0) is not returned.
+    """
+    if n > len(_pell_smallest) or _pell_smallest[n] is None:
+        raise ValueError("Pell sequence unknown for n=" + str(n))
+    x1, y1 = _pell_smallest[n]
+    yield x1, y1
+    x, y = x1, y1
+    while True:
+        curx = x
+        x = x1 * x + n * y1 * y
+        y = x1 * y + y1 * curx
+        yield x, y

@@ -72,6 +72,12 @@ class MathTests(unittest.TestCase):
         self.assertEqual(10, m.isqrt(110))
         self.assertEqual(169, m.isqrt(28600))
 
+    def test_pell(self):
+        self.assertEqual([(2, 1), (7, 4), (26, 15), (97, 56)],
+                         list(itertools.takewhile(lambda p: p[0] < 100, m.pell_gen(3))))
+        self.assertEqual([(8, 3), (127, 48), (2024, 765)],
+                         list(itertools.takewhile(lambda p: p[0] < 10000, m.pell_gen(7))))
+
 
 if __name__ == '__main__':
     unittest.main()
