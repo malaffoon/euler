@@ -5,7 +5,7 @@ This project is me using Project Euler (https://projecteuler.net/) to learn Pyth
 * TODO - use problem interface, clean up runner
 * Started but not solved: 100, 650
 * 10% problems remaining: 650, 692, 710
-* Problem remaining in 1-100: 98, 100
+* Problem remaining in 1-100: 100
 
 
 ## Running
