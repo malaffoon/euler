@@ -12,7 +12,7 @@ discs at random, is a box containing eighty-five blue discs and thirty-five red 
 By finding the first arrangement to contain over 10^12 = 1,000,000,000,000 discs in total,
 determine the number of blue discs that the box would contain.
 
-
+---------------------------------------------------------------------------------------------------
 B/N x (B-1)/(N-1) = 1/2
 
 Solve that for B and you get the binomial: B^2 - B - N(N-1)/2 = 0 which has
@@ -47,6 +47,26 @@ First few generate quickly: n,b =
 27304197 19306983
 159140520 112529341
 927538921 655869061
+
+
+Revisit this one (it has been sitting on the shelf for a while)
+B = (1 + sqrt(1 + 2N(N-1))) / 2
+  => 1 + 2N(N-1) must be a perfect square, S
+N = (1 + sqrt(2S-1)) / 2
+  => 2S-1 must also be a perfect square
+Since N ~ sqrt(S)/sqrt(2) can we just start generating perfect squares for i=sqrt(2)*10^12
+looking for those where 2S-1 is also a perfect square (memoizing the perfect squares)?
+These are friggin big numbers though ... hmmm.
+
+
+I tried forcing the algebra into a Pell's equation but it wouldn't quite fit. But this is
+clearly a Diophantine equation, 2B^2 - 2B - N^2 + N = 0. After poking around the internet
+i did find this: https://www.alpertron.com.ar/QUAD.HTM. Plugin a=2,b=0,c=-1,d=-2,e=1,f=0
+and it spits out:
+B(k+1) = 3B(k) + 2N(k) - 2
+N(k+1) = 4B(k) + 3N(k) - 3
+From the problem description, we know a valid B,N = 85,120. So run it ... hits in 13 iterations!
+
 """
 import itertools
 
@@ -56,25 +76,15 @@ from utils import mathex
 class Problem100(object):
     @staticmethod
     def solve():
-        # start with first odd number above 1e12/sqrt(2)
-        b0 = int(1e12 / 1.414)
-        if b0 % 2 == 0: b0 += 1
-        print(b0)
-        for b in itertools.count(start=b0, step=2):
-            if (b-1) % 10000000 == 0: print(b)
-            y2 = 1 + 8 * b * (b-1)
-            y = mathex.isqrt(y2)
-            if y*y == y2:
-                n = int((1+y)/2)
-                print(n, b)
-                return b
-        return None
+        b, n = 85, 120
+        while n <= 1e12:
+            b, n = 3 * b + 2 * n - 2, 4 * b + 3 * n - 3
+        return b
 
     @staticmethod
     def get_tests():
-        return [(None, None)]
+        return [(None, 756872327473)]
     
 
 if __name__ == '__main__':
-    # Problem100.samples()
     print("The answer is", Problem100.solve())

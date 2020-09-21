@@ -152,7 +152,5 @@ def pell_gen(n: int) -> (int, int):
     yield x1, y1
     x, y = x1, y1
     while True:
-        curx = x
-        x = x1 * x + n * y1 * y
-        y = x1 * y + y1 * curx
+        x, y = x1 * x + n * y1 * y, x1 * y + y1 * x
         yield x, y
