@@ -30,5 +30,6 @@ class Problem1(object):
             if n % 3 == 0 or n % 5 == 0: answer += n
         return answer
 
+
 if __name__ == '__main__':
     print("The sum of all the multiples of 3 or 5 below 1000 is", Problem1().solve(1000))
