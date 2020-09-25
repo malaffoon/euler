@@ -4,10 +4,15 @@ package main
 
 import (
 	"fmt"
-	euler "github.com/malaffoon/euler/go"
+	. "github.com/malaffoon/euler/go/euler/internal"
 )
 
 func main() {
-	fmt.Println("Running euler main")
-	fmt.Println(euler.Config())
+	fmt.Println("Running all (Go solved) Project Euler problems ...")
+	problems := []Problem{
+		new(Problem001),
+	}
+	for _, p := range problems {
+		p.Run()
+	}
 }

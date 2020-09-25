@@ -6,5 +6,6 @@ type Problem interface {
 	Solve() int
 
 	// Run the problem; this may run examples, print results, etc.
+	// This is called by the wrapper that runs all or some problems.
 	Run()
 }
