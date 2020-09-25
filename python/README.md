@@ -3,9 +3,10 @@
 This project is me using Project Euler (https://projecteuler.net/) to learn Python.
 * TODO - get Numba working with some of the utils modules
 * TODO - use problem interface, clean up runner
-* Started but not solved: 100, 650
+* Started but not solved: 650
 * 10% problems remaining: 650, 692, 710
-* Problem remaining in 1-100: 100
+* Unlucky Squares: 169 (50%)
+* Fibonacci Fever remaining: 233 (70%) 
 
 
 ## Running
