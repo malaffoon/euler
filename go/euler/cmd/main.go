@@ -11,6 +11,7 @@ func main() {
 	problems := []Problem{
 		new(Problem001),
 		new(Problem002),
+		new(Problem003),
 	}
 	for _, p := range problems {
 		start := time.Now()
