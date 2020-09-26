@@ -1,1 +1,1 @@
-package prime
+package utils

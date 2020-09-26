@@ -7,15 +7,22 @@ import (
 type Problem001 struct {
 }
 
-// TODO - using pointer to avoid copying problem, not to mutate it. What is best practice?
+func (p *Problem001) Name() string {
+	return "Problem 1"
+}
+
+func (p *Problem001) Desc() string {
+	return "Multiples of 3 and 5"
+}
+
 func (p *Problem001) Solve() int {
 	return p.solve(1000)
 }
 
 func (p *Problem001) Run() {
-	fmt.Println("Problem 1 - Multiples of 3 and 5")
-	fmt.Printf("  Solve for 10: %d\n", p.solve(10))
-	fmt.Printf("  Solve for 1000: %d\n", p.solve(1000))
+	fmt.Printf("%s - %s\n", p.Name(), p.Desc())
+	fmt.Printf("  Solve for 10, expect 23: %d\n", p.solve(10))
+	fmt.Printf("  Solve for 1000, expect 233168: %d\n", p.solve(1000))
 }
 
 func (p *Problem001) solve(limit int) int {
