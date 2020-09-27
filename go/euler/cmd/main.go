@@ -35,6 +35,7 @@ func parseAction(args []string) Action {
 }
 
 // parse the (remaining) args for problems
+// TODO - is there a way to discover the problems instead of explicitly listing them?
 func getProblems(args []string) []Problem {
 	problems := []Problem{
 		new(Problem001),
@@ -42,6 +43,8 @@ func getProblems(args []string) []Problem {
 		new(Problem003),
 		new(Problem004),
 		new(Problem005),
+		new(Problem006),
+		new(Problem007),
 	}
 	// TODO - parse for specific test numbers
 	// TODO   for now, always return all of them
@@ -56,7 +59,8 @@ func main() {
 		case SOLVE:
 			start := time.Now()
 			actual := p.Solve()
-			fmt.Printf("%s: %d (%s)\n", p.Name(), actual, time.Since(start))
+			elapsed := time.Since(start)
+			fmt.Printf("%s: %d (%s)\n", p.Name(), actual, elapsed)
 		case RUN:
 			p.Run()
 		}

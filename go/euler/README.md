@@ -31,5 +31,5 @@ go run cmd/main.go
 ### Useful Links
 * https://golang.org/
     * https://golang.org/pkg/
-    * 
+    * https://golang.org/pkg/math/
 * http://www.golangpatterns.info/home
