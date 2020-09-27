@@ -21,8 +21,8 @@ func (p *Problem001) Solve() int {
 
 func (p *Problem001) Run() {
 	fmt.Printf("%s - %s\n", p.Name(), p.Desc())
-	fmt.Printf("  Solve for 10, expect 23: %d\n", p.solve(10))
-	fmt.Printf("  Solve for 1000, expect 233168: %d\n", p.solve(1000))
+	fmt.Printf("  Solve(10) = %d\n", p.solve(10))     // 23
+	fmt.Printf("  Solve(1000) = %d\n", p.solve(1000)) // 233168
 }
 
 func (p *Problem001) solve(limit int) int {
