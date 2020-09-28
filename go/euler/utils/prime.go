@@ -37,7 +37,7 @@ func PrimeFactors(value uint64) (factors []uint32) {
 	return
 }
 
-func Nth(n uint) uint32 {
+func NthPrime(n uint) uint32 {
 	limit := uint32(30)
 	if n >= 10 {
 		nf := float64(n)

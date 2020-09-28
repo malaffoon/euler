@@ -29,5 +29,5 @@ func (p *Problem007) Run() {
 }
 
 func (p *Problem007) solve(n uint) uint {
-	return uint(utils.Nth(n))
+	return uint(utils.NthPrime(n))
 }
