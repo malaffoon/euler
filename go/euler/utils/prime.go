@@ -2,14 +2,18 @@ package utils
 
 import "math"
 
-// Calculate all primes up to a limit, using Sieve of Eratosthenes
+// Calculate all primes up to a limit, using Sieve of Eratosthenes.
+// Obviously, this is limited to values less than max uint32 value.
 func Primes(limit uint32) (primes []uint32) {
 	sieve := make([]bool, limit)
+	sqrtOfLimit := uint32(math.Floor(math.Sqrt(float64(limit))))
 	for i := uint32(2); i < limit; i++ {
 		if sieve[i] == false {
 			primes = append(primes, i)
-			for j := i * i; j < limit; j += i {
-				sieve[j] = true
+			if i < sqrtOfLimit {
+				for j := i * i; j < limit; j += i {
+					sieve[j] = true
+				}
 			}
 		}
 	}
