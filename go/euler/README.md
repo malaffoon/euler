@@ -11,6 +11,7 @@ I haven't figured out a good framework for running and timing the solutions. I'd
 * run a single problem's examples (including solution example)
 * run and time all problems' solutions (and/or a subset of them)
 * run all problems' examples 
+* verify all the examples of all the problems are still being calculated correctly
 * not be overly complex unless that teaches me something about Go
 
 I need to learn more about Go's best practices. Should the examples be handled as tests?

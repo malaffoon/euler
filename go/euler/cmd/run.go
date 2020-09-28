@@ -6,5 +6,5 @@ import (
 
 // just a wrapper to run a hard-coded test, for debugging
 func main() {
-	new(Problem010).Run()
+	new(Problem011).Run()
 }
