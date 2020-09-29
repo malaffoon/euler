@@ -1,7 +1,6 @@
 package internal
 
 import (
-	"fmt"
 	"strconv"
 	"strings"
 )
@@ -43,8 +42,7 @@ func (p *Problem011) Solve() int {
 }
 
 func (p *Problem011) Run() {
-	fmt.Printf("%s - %s\n", p.Name(), p.Desc())
-	fmt.Printf("  Solve() = %d\n", p.solve()) // 70600674
+	runProblem(p, 70600674)
 }
 
 func (p *Problem011) solve() int {

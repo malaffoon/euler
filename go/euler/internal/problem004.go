@@ -1,9 +1,5 @@
 package internal
 
-import (
-	"fmt"
-)
-
 type Problem004 struct {
 }
 
@@ -20,8 +16,7 @@ func (p *Problem004) Solve() int {
 }
 
 func (p *Problem004) Run() {
-	fmt.Printf("%s - %s\n", p.Name(), p.Desc())
-	fmt.Printf("  Solve() = %d\n", p.solve()) // 906609
+	runProblem(p, 906609)
 }
 
 func (p *Problem004) solve() uint {
