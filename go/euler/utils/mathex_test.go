@@ -26,3 +26,20 @@ func TestLCM(t *testing.T) {
 		}
 	}
 }
+
+func TestBinomial(t *testing.T) {
+	tests := []struct {
+		n        int
+		k        int
+		expected int
+	}{
+		{1, 1, 1},
+		{10, 6, 210},
+	}
+	for _, test := range tests {
+		actual := Binomial(test.n, test.k)
+		if actual != test.expected {
+			t.Errorf("Binomial(%d,%d) = %d. Expected %d", test.n, test.k, actual, test.expected)
+		}
+	}
+}
