@@ -13,11 +13,21 @@ func productInt(values ...int) int {
 }
 
 func maxInt(values ...int) int {
-	maxValue := int(math.MinInt16)
+	maxValue := math.MinInt16
 	for _, value := range values {
 		if value > maxValue {
 			maxValue = value
 		}
 	}
 	return maxValue
+}
+
+func minInt(values ...int) int {
+	minValue := math.MaxInt16
+	for _, value := range values {
+		if value < minValue {
+			minValue = value
+		}
+	}
+	return minValue
 }
