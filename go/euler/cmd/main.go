@@ -59,6 +59,9 @@ func getProblems(args []string) []Problem {
 		new(Problem019),
 		new(Problem020),
 		new(Problem021),
+		new(Problem022),
+		new(Problem023),
+		new(Problem024),
 	}
 	// TODO - parse for specific test numbers
 	// TODO   for now, always return all of them

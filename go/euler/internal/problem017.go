@@ -4,12 +4,12 @@ import (
 	"bytes"
 )
 
-var numbers = []string{
+var Problem17Number = []string{
 	"", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine",
 	"ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen",
 }
 
-var tens = []string{
+var Problem17Tens = []string{
 	"", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety",
 }
 
@@ -53,15 +53,15 @@ func words(n int) string {
 	switch {
 	case n < 1:
 	case n < 20:
-		buf.WriteString(numbers[n])
+		buf.WriteString(Problem17Number[n])
 	case n < 100:
-		buf.WriteString(tens[n/10])
+		buf.WriteString(Problem17Tens[n/10])
 		if n%10 != 0 {
 			buf.WriteString(" ")
-			buf.WriteString(numbers[n%10])
+			buf.WriteString(Problem17Number[n%10])
 		}
 	case n < 1000:
-		buf.WriteString(numbers[n/100])
+		buf.WriteString(Problem17Number[n/100])
 		buf.WriteString(" hundred")
 		if n%100 != 0 {
 			buf.WriteString(" and ")

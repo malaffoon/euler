@@ -8,7 +8,7 @@ import (
 
 // just a wrapper to run a hard-coded test, for debugging
 func main() {
-	p := new(Problem021)
+	p := new(Problem024)
 
 	p.Run()
 
