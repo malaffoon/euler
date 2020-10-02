@@ -12,7 +12,7 @@ The incredible formula n^2−79n+1601 was discovered, which produces 80 primes f
 values 0≤n≤79. The product of the coefficients, −79 and 1601, is −126479.
 
 Considering quadratics of the form:
-    n^2+an+b, where |a|<1000|a|<1000
+    n^2+an+b, where |a|<1000 and |b|<=1000
 
 Find the product of the coefficients, a and b, for the quadratic expression that produces the maximum number
 of primes for consecutive values of n, starting with n==0.
@@ -25,6 +25,13 @@ so a must be odd
 3. since n=1 must produce a prime then a > -b
 ...
 all this makes me think there might be a non-algorithmic way to solve this
+
+After brute forcing the answer, i read the forum. Somebody did work through the algebra:
+They noted that n^2-79n+1601 = (n-40)^2+n-40+41, i.e. p^2+p+41 where p=n-40
+They surmised that the best solution will have the same form, i.e. (n-x)^2+n-x+41
+Doing maths, (n-x)^2+n-x+41 = n^2+(1-2x)n+x^2-x+41 = n^2+an+b, a=1-2x, b=x^2-x+41.
+Applying the range limits to b, basically solving x^2-x+41=1000, gives x~31.
+Plug that back in gives a=-61, b=971. Which is the solution, ab=-59231.
 """
 
 import itertools
@@ -34,6 +41,11 @@ from utils.prime import primes, is_prime
 class Problem27(object):
     @staticmethod
     def solve():
+        a, b = -61, 971
+        return a * b
+
+    @staticmethod
+    def brute_force():
         max_primes = 0
         result = None
         for b in primes(1001):

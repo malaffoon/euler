@@ -39,3 +39,12 @@ func sumInt(values ...int) int {
 	}
 	return sum
 }
+
+func indexOfInt(values []int, element int) int {
+	for i, value := range values {
+		if value == element {
+			return i
+		}
+	}
+	return -1
+}
