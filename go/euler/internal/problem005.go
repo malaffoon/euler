@@ -17,15 +17,15 @@ func (p *Problem005) Desc() string {
 }
 
 func (p *Problem005) Solve() int {
-	return int(p.solve([]uint{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20}))
+	return int(p.solve([]int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20}))
 }
 
 func (p *Problem005) Run() {
 	fmt.Printf("%s - %s\n", p.Name(), p.Desc())
-	fmt.Printf("  Solve(1..10) = %d\n", p.solve([]uint{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}))                                         // 2520
-	fmt.Printf("  Solve(1..20) = %d\n", p.solve([]uint{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20})) // 232792560
+	fmt.Printf("  Solve(1..10) = %d\n", p.solve([]int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}))                                         // 2520
+	fmt.Printf("  Solve(1..20) = %d\n", p.solve([]int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20})) // 232792560
 }
 
-func (p *Problem005) solve(values []uint) uint {
+func (p *Problem005) solve(values []int) int {
 	return utils.LCM(values)
 }

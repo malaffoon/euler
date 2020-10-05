@@ -1,6 +1,8 @@
 package internal
 
-import "math"
+import (
+	"math"
+)
 
 // A place for common functionality that doesn't qualify as general utility.
 
@@ -47,4 +49,24 @@ func indexOfInt(values []int, element int) int {
 		}
 	}
 	return -1
+}
+
+// NOTE: using this function seems a teeny bit slower (?!) than inlining Itoa, i.e.
+// sum := 0
+// for _, r := range strconv.Itoa(n) {
+//     sum += int(r-'0')
+// }
+// Much of the slower-ness appears to be the function call itself.
+func digits(n int) []int {
+	// peel off digits
+	result := make([]int, 0, 8)
+	for n > 0 {
+		result = append(result, n%10)
+		n /= 10
+	}
+	// reverse them
+	for i, j := 0, len(result)-1; i < j; i, j = i+i, j-1 {
+		result[i], result[j] = result[j], result[i]
+	}
+	return result
 }

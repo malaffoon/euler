@@ -1,16 +1,16 @@
 package utils
 
 // Return the Least Common Multiple of two values
-func LCM(values []uint) uint {
+func LCM(values []int) int {
 	lcm := values[0]
 	for _, value := range values[1:] {
-		lcm = lcm * (uint(value) / GCD(lcm, uint(value)))
+		lcm = lcm * (value / GCD(lcm, value))
 	}
 	return lcm
 }
 
 // Return the Greatest Common Divisor of two values
-func GCD(a uint, b uint) uint {
+func GCD(a int, b int) int {
 	// use Euclid's Algorithm
 	for a != b {
 		if a > b {

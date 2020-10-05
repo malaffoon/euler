@@ -7,17 +7,17 @@ import (
 
 func TestLCM(t *testing.T) {
 	tests := []struct {
-		values   []uint
-		expected uint
+		values   []int
+		expected int
 	}{
-		{[]uint{1}, 1},
-		{[]uint{7}, 7},
-		{[]uint{1, 1, 1}, 1},
-		{[]uint{1, 2}, 2},
-		{[]uint{2, 5}, 10},
-		{[]uint{8, 9, 12}, 72},
-		{[]uint{17, 71}, 1207},
-		{[]uint{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, 2520},
+		{[]int{1}, 1},
+		{[]int{7}, 7},
+		{[]int{1, 1, 1}, 1},
+		{[]int{1, 2}, 2},
+		{[]int{2, 5}, 10},
+		{[]int{8, 9, 12}, 72},
+		{[]int{17, 71}, 1207},
+		{[]int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, 2520},
 	}
 	for _, test := range tests {
 		actual := LCM(test.values)
