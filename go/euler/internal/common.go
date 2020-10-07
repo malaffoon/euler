@@ -70,3 +70,27 @@ func digits(n int) []int {
 	}
 	return result
 }
+
+func isPalindrome(text string) bool {
+	for i, j := 0, len(text)-1; i < j; i, j = i+1, j-1 {
+		if text[i] != text[j] {
+			return false
+		}
+	}
+	return true
+}
+
+// used in "pandigital" problems
+func distinctValidDigits(pan bool, values ...int) bool {
+	digits := make(map[int]bool)
+	for _, value := range values {
+		for ; value > 0; value /= 10 {
+			d := value % 10
+			if d == 0 || digits[d] {
+				return false
+			}
+			digits[d] = true
+		}
+	}
+	return !pan || len(digits) == 9
+}

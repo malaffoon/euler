@@ -45,17 +45,3 @@ func (p *Problem032) Solve() int {
 func (p *Problem032) Run() {
 	runProblem(p, 45228)
 }
-
-func distinctValidDigits(pan bool, values ...int) bool {
-	digits := make(map[int]bool)
-	for _, value := range values {
-		for ; value > 0; value /= 10 {
-			d := value % 10
-			if d == 0 || digits[d] {
-				return false
-			}
-			digits[d] = true
-		}
-	}
-	return !pan || len(digits) == 9
-}
