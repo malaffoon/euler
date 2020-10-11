@@ -1,5 +1,7 @@
 package utils
 
+import "math"
+
 // Return the Least Common Multiple of two values
 func LCM(values []int) int {
 	lcm := values[0]
@@ -41,4 +43,31 @@ func Binomial(n int, k int) int {
 type bin struct {
 	n int
 	k int
+}
+
+func Trigonal(n int) int {
+	return n * (n + 1) / 2
+}
+
+func IsTrigonal(v int) bool {
+	n := (math.Sqrt(float64(1+8*v)) - 1) / 2
+	return float64(int(n)) == n
+}
+
+func Pentagonal(n int) int {
+	return n * (3*n - 1) / 2
+}
+
+func IsPentagonal(v int) bool {
+	n := (math.Sqrt(float64(1+24*v)) + 1) / 6
+	return float64(int(n)) == n
+}
+
+func Hexagonal(n int) int {
+	return n * (2*n - 1)
+}
+
+func IsHexagonal(v int) bool {
+	n := (math.Sqrt(float64(1+8*v)) + 1) / 4
+	return float64(int(n)) == n
 }

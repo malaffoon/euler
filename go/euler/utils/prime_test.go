@@ -14,7 +14,7 @@ func TestPrimes(t *testing.T) {
 	}
 }
 
-func TestPrimeFactors(t *testing.T) {
+func TestPrimeFactorsExpanded(t *testing.T) {
 	tests := []struct {
 		n        int
 		expected []int
@@ -28,9 +28,9 @@ func TestPrimeFactors(t *testing.T) {
 	}
 
 	for _, test := range tests {
-		actual := PrimeFactors(test.n)
+		actual := PrimeFactorsExpanded(test.n)
 		if !reflect.DeepEqual(actual, test.expected) {
-			t.Errorf("PrimeFactors(%d) = %s. Expected %s", test.n, fmt.Sprint(actual), fmt.Sprint(test.expected))
+			t.Errorf("PrimeFactorsExpanded(%d) = %s. Expected %s", test.n, fmt.Sprint(actual), fmt.Sprint(test.expected))
 		}
 	}
 }

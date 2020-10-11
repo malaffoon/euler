@@ -34,11 +34,11 @@ func NthPrime(n int) int {
 }
 
 type PrimeFactor struct {
-	prime int
-	count int
+	Prime int
+	Count int
 }
 
-func getPrimeFactors(value int) (factors []PrimeFactor) {
+func PrimeFactors(value int) (factors []PrimeFactor) {
 	for _, prime := range Primes(int(1 + math.Round(math.Sqrt(float64(value))))) {
 		count := 0
 		for value > 1 && value%prime == 0 {
@@ -58,10 +58,10 @@ func getPrimeFactors(value int) (factors []PrimeFactor) {
 	return
 }
 
-func PrimeFactors(value int) (factors []int) {
-	for _, pf := range getPrimeFactors(value) {
-		for i := 0; i < pf.count; i++ {
-			factors = append(factors, pf.prime)
+func PrimeFactorsExpanded(value int) (factors []int) {
+	for _, pf := range PrimeFactors(value) {
+		for i := 0; i < pf.Count; i++ {
+			factors = append(factors, pf.Prime)
 		}
 	}
 	return
@@ -76,13 +76,13 @@ func Divisors(value int) (divisors []int) {
 
 	// using 1350 as an example; 1350 = 2 x 3 x 3 x 3 x 5 x 5
 	// first, get the factors, e.g. 1350 -> (2,1),(3,3),(5,2)
-	factors := getPrimeFactors(value)
+	factors := PrimeFactors(value)
 
 	// expand into tuples of exponentiated values -> (1,2),(1,3,9,27),(1,5,25)
 	tuples := make([][]int, len(factors))
 	for f, factor := range factors {
-		tuples[f] = make([]int, factor.count+1)
-		for i, v := 0, 1; i <= factor.count; i, v = i+1, v*factor.prime {
+		tuples[f] = make([]int, factor.Count+1)
+		for i, v := 0, 1; i <= factor.Count; i, v = i+1, v*factor.Prime {
 			tuples[f][i] = v
 		}
 	}

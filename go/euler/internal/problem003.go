@@ -27,6 +27,6 @@ func (p *Problem003) Run() {
 }
 
 func (p *Problem003) SolveExample(n int) int {
-	factors := utils.PrimeFactors(n)
+	factors := utils.PrimeFactorsExpanded(n)
 	return int(factors[len(factors)-1])
 }
