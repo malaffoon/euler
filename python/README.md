@@ -5,8 +5,7 @@ This project is me using Project Euler (https://projecteuler.net/) to learn Pyth
 * TODO - use problem interface, clean up runner
 * Started but not solved: 650
 * 10% problems remaining: 650, 692, 710
-* Unlucky Squares: 169 (50%)
-* Fibonacci Fever remaining: 233 (70%) 
+* Prime Obsession: 101, 103, 107, 109, 113, 127, 131, 137, ...
 
 
 ## Running
