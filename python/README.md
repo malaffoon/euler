@@ -4,7 +4,8 @@ This project is me using Project Euler (https://projecteuler.net/) to learn Pyth
 * TODO - get Numba working with some of the utils modules
 * TODO - use problem interface, clean up runner
 * Started but not solved: 650
-* 10% problems remaining: 650, 692, 710
+* 5% problems remaining: 719
+* 10% problems remaining: 650, 710
 * Prime Obsession: 101, 103, 107, 109, 113, 127, 131, 137, ...
 
 
