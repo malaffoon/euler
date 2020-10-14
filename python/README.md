@@ -6,8 +6,8 @@ This project is me using Project Euler (https://projecteuler.net/) to learn Pyth
 * Started but not solved: 650
 * 5% problems remaining: 719
 * 10% problems remaining: 650, 710
-* Prime Obsession: 101, 103, 107, 109, 113, 127, 131, 137, ...
-
+* Prime Obsession: 103, 109, 113, 127, 131, 137, ...
+    * 103, 105, 106 are closely related dealing with "special subset sums"
 
 ## Running
 
