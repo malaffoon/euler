@@ -80,3 +80,11 @@ func TestVisitPermutations2Abort(t *testing.T) {
 		t.Errorf("VisitPermutations2('7654321') abort test gave count = %d. Expected %d", count, 720)
 	}
 }
+
+func TestPermutations(t *testing.T) {
+	actual := IndexPermutations([]int{1, 2, 3})
+	if len(actual) != 6 {
+		t.Errorf("IndexPermutations([1,2,3]) should have returned 6 permutations")
+	}
+	//println(fmt.Sprint(actual))
+}

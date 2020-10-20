@@ -165,3 +165,39 @@ func perm(runes []rune, f func([]rune) bool, i int) bool {
 	}
 	return flag
 }
+
+// Returns an array of permutations of an array of ints up to (excluding) the value given, e.g.
+// IndexPermutations(3) -> [0,1,2],[0,2,1],[1,0,2],[1,2,0],[2,0,1],[2,1,0]
+func IndexPermutations(n int) [][]int {
+	data := make([]int, n)
+	for i := 0; i < n; i++ {
+		data[i] = i
+	}
+	perms := make([][]int, 0, Factorial(n))
+	perms = append(perms, append([]int(nil), data...))
+	stack := make([]int, n)
+	for s := 0; s < n; {
+		if stack[s] < s {
+			if s%2 == 0 {
+				data[0], data[s] = data[s], data[0]
+			} else {
+				data[stack[s]], data[s] = data[s], data[stack[s]]
+			}
+			perms = append(perms, append([]int(nil), data...))
+			stack[s] += 1
+			s = 0
+		} else {
+			stack[s] = 0
+			s += 1
+		}
+	}
+	return perms
+}
+
+// simple factorial function for small int values
+func Factorial(n int) int {
+	if n == 0 {
+		return 1
+	}
+	return n * Factorial(n-1)
+}
