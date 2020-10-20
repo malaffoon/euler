@@ -38,7 +38,8 @@ class Problem650(object):
 
     @staticmethod
     def get_tests():
-        return [(5, 5736), (10, 721034267), (100, 332792866), (20000, None)]
+        return [(None, None)]
+        # return [(5, 5736), (10, 721034267), (100, 332792866), (20000, None)]
 
 
 if __name__ == '__main__':

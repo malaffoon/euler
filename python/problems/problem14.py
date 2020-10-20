@@ -51,7 +51,6 @@ class Problem14(object):
         for v in range(500000, 1000000):
             l = collatz.length(v)
             if l > longest:
-                print("new longest value", v, l)
                 longest = l
                 max_value = v
         return max_value

@@ -40,7 +40,6 @@ class Problem11(object):
             nonlocal max_product
             prod = functools.reduce(lambda x,y: x * y, s, 1)
             if prod > max_product:
-                print("Improving max with {} = {}", s, prod)
                 max_product = prod
 
         # being kind of lazy and brute-forcing this (not very pythonic)

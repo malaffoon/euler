@@ -28,7 +28,8 @@ from operator import mul
 class Problem493(object):
     @staticmethod
     def solve():
-        return 7 * (1 - reduce(mul, range(50, 40, -1), 1) / reduce(mul, range(70, 60, -1), 1))
+        answer = 7 * (1 - reduce(mul, range(50, 40, -1), 1) / reduce(mul, range(70, 60, -1), 1))
+        return int(answer * 1e9) / 1e9
 
     @staticmethod
     def get_tests():
