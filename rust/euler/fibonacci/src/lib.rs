@@ -37,7 +37,7 @@ pub fn fibonacci() -> Fibonacci {
 /// # Arguments
 /// `n` - 1-based n
 pub fn fibn(n: u32) -> u32 {
-    let sqrt5: f64 = 5f64.sqrt();
+    let sqrt5: f64 = 5.0f64.sqrt();
     let phi: f64 = (1.0 + sqrt5) / 2.0;
 
     (0.5f64 + phi.powi(n as i32) / sqrt5).floor() as u32
