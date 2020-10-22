@@ -1,9 +1,9 @@
-pub fn solve() -> u32 {
+pub fn solve() -> u64 {
     solve_example(1000)
 }
 
-fn solve_example(limit: u32) -> u32 {
-    (1..limit).filter(|n| n % 3 == 0 || n % 5 == 0).sum()
+fn solve_example(limit: u32) -> u64 {
+    (1..limit).filter(|n| n % 3 == 0 || n % 5 == 0).sum::<u32>() as u64
 }
 
 #[cfg(test)]

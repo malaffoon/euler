@@ -1,11 +1,11 @@
 #[derive(Debug, Eq, PartialEq)]
 pub struct Fibonacci {
-    curr: u32,
-    next: u32,
+    curr: u64,
+    next: u64,
 }
 
 impl Iterator for Fibonacci {
-    type Item = u32;
+    type Item = u64;
 
     fn next(&mut self) -> Option<Self::Item> {
         let temp = self.curr + self.next;
@@ -36,11 +36,11 @@ pub fn fibonacci() -> Fibonacci {
 ///
 /// # Arguments
 /// `n` - 1-based n
-pub fn fibn(n: u32) -> u32 {
+pub fn fibn(n: u32) -> u64 {
     let sqrt5: f64 = 5.0f64.sqrt();
     let phi: f64 = (1.0 + sqrt5) / 2.0;
 
-    (0.5f64 + phi.powi(n as i32) / sqrt5).floor() as u32
+    (0.5f64 + phi.powi(n as i32) / sqrt5).floor() as u64
 }
 
 #[cfg(test)]

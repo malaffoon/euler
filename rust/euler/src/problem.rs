@@ -3,5 +3,5 @@
 trait Problem {
     fn name() -> String;
     fn desc() -> String;
-    fn solve() -> u32;
+    fn solve() -> u64;
 }

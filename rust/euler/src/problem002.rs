@@ -1,10 +1,10 @@
 use fibonacci::fibonacci;
 
-pub fn solve() -> u32 {
+pub fn solve() -> u64 {
     solve_example(4_000_000)
 }
 
-fn solve_example(max_value: u32) -> u32 {
+fn solve_example(max_value: u64) -> u64 {
     fibonacci().filter(|n| n % 2 == 0).take_while(|n| n < &max_value).sum()
 }
 

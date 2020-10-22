@@ -1,12 +1,12 @@
 use prime::Sieve;
 
-pub fn solve() -> u32 {
+pub fn solve() -> u64 {
     solve_example(600851475143)
 }
 
-fn solve_example(value: u64) -> u32 {
+fn solve_example(value: u64) -> u64 {
     let sieve = Sieve::new();
-    sieve.prime_factors(value).last().copied().unwrap() as u32
+    sieve.prime_factors(value).last().copied().unwrap()
 }
 
 #[cfg(test)]
