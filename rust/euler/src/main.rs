@@ -6,6 +6,8 @@ mod problem005;
 mod problem006;
 mod problem007;
 mod problem008;
+mod problem009;
+mod problem010;
 
 // use automod to pull in all problem modules
 // TODO - problem with this is CLion doesn't know modules are attached to crate
@@ -15,6 +17,7 @@ fn main() {
     let problems: Vec<fn() -> u64> = vec![
         problem001::solve, problem002::solve, problem003::solve, problem004::solve,
         problem005::solve, problem006::solve, problem007::solve, problem008::solve,
+        problem009::solve, problem010::solve,
     ];
     for (i, p) in problems.iter().enumerate() {
         let start = std::time::Instant::now();
